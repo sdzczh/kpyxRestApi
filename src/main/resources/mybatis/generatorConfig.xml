@@ -40,7 +40,7 @@
         <plugin type="org.mybatis.generator.plugins.MybatisServicePlugin">
             <property name="targetPackage" value="com.zh.program.Service" />
             <property name="implementationPackage" value="com.zh.program.Service.impl" />
-            <property name="targetProject" value="H:\MyWork\WagasRestApi\src\main\java" />
+            <property name="targetProject" value="H:\MyWork\kpyxRestApi\src\main\java" />
             <property name="enableInsert" value="true" />
             <property name="enableInsertSelective" value="true" />
             <property name="enableUpdateByPrimaryKey" value="true" />
@@ -66,7 +66,7 @@
 
 
         <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/test" userId="root" password="root">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/kpyxdb" userId="root" password="root">
         </jdbcConnection>
 
         <!-- 类型转换 -->
@@ -76,7 +76,7 @@
         </javaTypeResolver>
 
         <!-- 生成实体类的位置 -->
-        <javaModelGenerator targetPackage="com.zh.program.Entrty" targetProject="H:\MyWork\WagasRestApi\src\main\java">
+        <javaModelGenerator targetPackage="com.zh.program.Entrty" targetProject="H:\MyWork\kpyxRestApi\src\main\java">
             <!-- for MyBatis3/MyBatis3Simple 自动为每一个生成的类创建一个构造方法，构造方法包含了所有的field；而不是使用setter； -->
             <property name="constructorBased" value="false" />
 
@@ -87,7 +87,7 @@
         </javaModelGenerator>
 
         <!-- 生成mapper xml文件 -->
-        <sqlMapGenerator targetPackage="mybatis.mapper" targetProject="H:\MyWork\WagasRestApi\src\main\resources">
+        <sqlMapGenerator targetPackage="mybatis.mapper" targetProject="H:\MyWork\kpyxRestApi\src\main\resources">
             <!-- 解释同上:生成实体类的位置 -->
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
@@ -95,7 +95,7 @@
         <!-- 对于mybatis来说，即生成Mapper接口，注意，如果没有配置该元素，那么默认不会生成Mapper接口 targetPackage/targetProject:同javaModelGenerator type：选择怎么生成mapper接口（在MyBatis3/MyBatis3Simple下）： 1，ANNOTATEDMAPPER：会生成使用Mapper接口+Annotation的方式创建（SQL生成在annotation中），不会生成对应的XML； 2，MIXEDMAPPER：使用混合配置，会生成Mapper接口，并适当添加合适的Annotation，但是XML会生成在XML中；
             3，XMLMAPPER：会生成Mapper接口，接口完全依赖XML； 注意，如果context是MyBatis3Simple：只支持ANNOTATEDMAPPER和XMLMAPPER -->
         <!-- 生成mapper接口生成的位置 -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.zh.program.Dao" targetProject="H:\MyWork\WagasRestApi\src\main\java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.zh.program.Dao" targetProject="H:\MyWork\kpyxRestApi\src\main\java">
             <!-- 解释同上:生成实体类的位置 -->
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
@@ -115,7 +115,7 @@
             <generatedKey column="id" sqlStatement="MySql" identity="true" />
         </table>
         -->
-        <table schema="" tableName="user"  enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        <table schema="" tableName="videos"  enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="id" sqlStatement="MySql" identity="true" />
         </table>
     </context>

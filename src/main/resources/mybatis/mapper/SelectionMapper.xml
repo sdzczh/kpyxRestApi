@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.program.Dao.SelectionMapper">
+  <resultMap id="BaseResultMap" type="com.zh.program.Entrty.Selection">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="invoice_id" jdbcType="INTEGER" property="invoiceId" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, invoice_id, number, create_time, update_time
+  </sql>
+  <insert id="insert" parameterType="com.zh.program.Entrty.Selection">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into selection (invoice_id, number, create_time, 
+      update_time)
+    values (#{invoiceId,jdbcType=INTEGER}, #{number,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zh.program.Entrty.Selection">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into selection
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="invoiceId != null">
+        invoice_id,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="invoiceId != null">
+        #{invoiceId,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.zh.program.Entrty.Selection">
+    update selection
+    set invoice_id = #{invoiceId,jdbcType=INTEGER},
+      number = #{number,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zh.program.Entrty.Selection">
+    update selection
+    <set>
+      <if test="invoiceId != null">
+        invoice_id = #{invoiceId,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from selection
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from selection
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from selection
+    where 1=1 
+    <if test="invoiceId != null">
+       and  invoice_id = #{invoiceId,jdbcType=INTEGER}
+    </if>
+    <if test="number != null">
+       and  number = #{number,jdbcType=INTEGER}
+    </if>
+    <if test="createTime != null">
+       and  create_time = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updateTime != null">
+       and  update_time = #{updateTime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from selection
+    where 1=1 
+    <if test="invoiceId != null">
+       and  invoice_id = #{invoiceId,jdbcType=INTEGER}
+    </if>
+    <if test="number != null">
+       and  number = #{number,jdbcType=INTEGER}
+    </if>
+    <if test="createTime != null">
+       and  create_time = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updateTime != null">
+       and  update_time = #{updateTime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from selection 
+    where 1=1 
+    <if test="invoiceId != null">
+       and  invoice_id = #{invoiceId,jdbcType=INTEGER}
+    </if>
+    <if test="number != null">
+       and  number = #{number,jdbcType=INTEGER}
+    </if>
+    <if test="createTime != null">
+       and  create_time = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updateTime != null">
+       and  update_time = #{updateTime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+</mapper>

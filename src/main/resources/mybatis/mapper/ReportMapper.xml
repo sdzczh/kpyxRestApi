@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.program.Dao.ReportMapper">
+  <resultMap id="BaseResultMap" type="com.zh.program.Entrty.Report">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="be_reported_company_name" jdbcType="VARCHAR" property="beReportedCompanyName" />
+    <result column="be_reported_name" jdbcType="VARCHAR" property="beReportedName" />
+    <result column="be_reported_address" jdbcType="VARCHAR" property="beReportedAddress" />
+    <result column="economic_nature" jdbcType="VARCHAR" property="economicNature" />
+    <result column="prove_information" jdbcType="VARCHAR" property="proveInformation" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="img_url" jdbcType="VARCHAR" property="imgUrl" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, phone, be_reported_company_name, be_reported_name, be_reported_address, 
+    economic_nature, prove_information, content, img_url, create_time, update_time
+  </sql>
+  <insert id="insert" parameterType="com.zh.program.Entrty.Report">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into report (name, phone, be_reported_company_name, 
+      be_reported_name, be_reported_address, economic_nature, 
+      prove_information, content, img_url, 
+      create_time, update_time)
+    values (#{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{beReportedCompanyName,jdbcType=VARCHAR}, 
+      #{beReportedName,jdbcType=VARCHAR}, #{beReportedAddress,jdbcType=VARCHAR}, #{economicNature,jdbcType=VARCHAR}, 
+      #{proveInformation,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zh.program.Entrty.Report">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into report
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="beReportedCompanyName != null">
+        be_reported_company_name,
+      </if>
+      <if test="beReportedName != null">
+        be_reported_name,
+      </if>
+      <if test="beReportedAddress != null">
+        be_reported_address,
+      </if>
+      <if test="economicNature != null">
+        economic_nature,
+      </if>
+      <if test="proveInformation != null">
+        prove_information,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="imgUrl != null">
+        img_url,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="beReportedCompanyName != null">
+        #{beReportedCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="beReportedName != null">
+        #{beReportedName,jdbcType=VARCHAR},
+      </if>
+      <if test="beReportedAddress != null">
+        #{beReportedAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="economicNature != null">
+        #{economicNature,jdbcType=VARCHAR},
+      </if>
+      <if test="proveInformation != null">
+        #{proveInformation,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null">
+        #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.zh.program.Entrty.Report">
+    update report
+    set name = #{name,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      be_reported_company_name = #{beReportedCompanyName,jdbcType=VARCHAR},
+      be_reported_name = #{beReportedName,jdbcType=VARCHAR},
+      be_reported_address = #{beReportedAddress,jdbcType=VARCHAR},
+      economic_nature = #{economicNature,jdbcType=VARCHAR},
+      prove_information = #{proveInformation,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      img_url = #{imgUrl,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zh.program.Entrty.Report">
+    update report
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="beReportedCompanyName != null">
+        be_reported_company_name = #{beReportedCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="beReportedName != null">
+        be_reported_name = #{beReportedName,jdbcType=VARCHAR},
+      </if>
+      <if test="beReportedAddress != null">
+        be_reported_address = #{beReportedAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="economicNature != null">
+        economic_nature = #{economicNature,jdbcType=VARCHAR},
+      </if>
+      <if test="proveInformation != null">
+        prove_information = #{proveInformation,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null">
+        img_url = #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from report
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from report
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from report
+    where 1=1 
+    <if test="name != null">
+       and  name = #{name,jdbcType=VARCHAR}
+    </if>
+    <if test="phone != null">
+       and  phone = #{phone,jdbcType=VARCHAR}
+    </if>
+    <if test="beReportedCompanyName != null">
+       and  be_reported_company_name = #{beReportedCompanyName,jdbcType=VARCHAR}
+    </if>
+    <if test="beReportedName != null">
+       and  be_reported_name = #{beReportedName,jdbcType=VARCHAR}
+    </if>
+    <if test="beReportedAddress != null">
+       and  be_reported_address = #{beReportedAddress,jdbcType=VARCHAR}
+    </if>
+    <if test="economicNature != null">
+       and  economic_nature = #{economicNature,jdbcType=VARCHAR}
+    </if>
+    <if test="proveInformation != null">
+       and  prove_information = #{proveInformation,jdbcType=VARCHAR}
+    </if>
+    <if test="content != null">
+       and  content = #{content,jdbcType=VARCHAR}
+    </if>
+    <if test="imgUrl != null">
+       and  img_url = #{imgUrl,jdbcType=VARCHAR}
+    </if>
+    <if test="createTime != null">
+       and  create_time = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updateTime != null">
+       and  update_time = #{updateTime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from report
+    where 1=1 
+    <if test="name != null">
+       and  name = #{name,jdbcType=VARCHAR}
+    </if>
+    <if test="phone != null">
+       and  phone = #{phone,jdbcType=VARCHAR}
+    </if>
+    <if test="beReportedCompanyName != null">
+       and  be_reported_company_name = #{beReportedCompanyName,jdbcType=VARCHAR}
+    </if>
+    <if test="beReportedName != null">
+       and  be_reported_name = #{beReportedName,jdbcType=VARCHAR}
+    </if>
+    <if test="beReportedAddress != null">
+       and  be_reported_address = #{beReportedAddress,jdbcType=VARCHAR}
+    </if>
+    <if test="economicNature != null">
+       and  economic_nature = #{economicNature,jdbcType=VARCHAR}
+    </if>
+    <if test="proveInformation != null">
+       and  prove_information = #{proveInformation,jdbcType=VARCHAR}
+    </if>
+    <if test="content != null">
+       and  content = #{content,jdbcType=VARCHAR}
+    </if>
+    <if test="imgUrl != null">
+       and  img_url = #{imgUrl,jdbcType=VARCHAR}
+    </if>
+    <if test="createTime != null">
+       and  create_time = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updateTime != null">
+       and  update_time = #{updateTime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from report 
+    where 1=1 
+    <if test="name != null">
+       and  name = #{name,jdbcType=VARCHAR}
+    </if>
+    <if test="phone != null">
+       and  phone = #{phone,jdbcType=VARCHAR}
+    </if>
+    <if test="beReportedCompanyName != null">
+       and  be_reported_company_name = #{beReportedCompanyName,jdbcType=VARCHAR}
+    </if>
+    <if test="beReportedName != null">
+       and  be_reported_name = #{beReportedName,jdbcType=VARCHAR}
+    </if>
+    <if test="beReportedAddress != null">
+       and  be_reported_address = #{beReportedAddress,jdbcType=VARCHAR}
+    </if>
+    <if test="economicNature != null">
+       and  economic_nature = #{economicNature,jdbcType=VARCHAR}
+    </if>
+    <if test="proveInformation != null">
+       and  prove_information = #{proveInformation,jdbcType=VARCHAR}
+    </if>
+    <if test="content != null">
+       and  content = #{content,jdbcType=VARCHAR}
+    </if>
+    <if test="imgUrl != null">
+       and  img_url = #{imgUrl,jdbcType=VARCHAR}
+    </if>
+    <if test="createTime != null">
+       and  create_time = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updateTime != null">
+       and  update_time = #{updateTime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+</mapper>

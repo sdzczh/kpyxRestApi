@@ -1,10 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-index
+<div id="notetext">
+    ${item.content}
+</div>
 </body>
+</html>
+<script type="text/javascript">
+    var obj = document.getElementById("notetext");
+    obj.innerHTML = obj.innerText;//这样重新设置html代码为解析后的格式
+</script>
 </html>
