@@ -32,6 +32,7 @@ public class BannerController {
     @ResponseBody
     @RequestMapping("/{type}")
     public String getAll(@PathVariable Integer type){
+
         Map<Object, Object> map = new HashMap<>();
         map.put("type", type);
         List<Banner> list = bannerService.selectAll(map);
