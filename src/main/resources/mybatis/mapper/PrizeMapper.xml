@@ -145,9 +145,9 @@
        and  update_time = #{updateTime,jdbcType=TIMESTAMP}
     </if>
   </select>
-  <select id="queryByPhoneIdCardInvoiceId" parameterType="java.util.Map" resultMap="BaseResultMap">
+  <select id="queryByPhoneIdCardInvoiceId" parameterType="java.util.Map" resultType="java.util.Map">
     select
-    pr.id, pr.type, vo.phone, vo.invoice_id, vo.id_card_num, pr.number
+    pr.id, pr.type, vo.phone, vo.invoice_id, vo.invoice_code, vo.id_card_num, pr.number
     from prize pr left join invoice vo on vo.id = pr.invoice_id
     where 1=1
     <if test="idCard != null and idCard != ''">
@@ -158,6 +158,9 @@
     </if>
     <if test="invoiceId != null and invoiceId != ''">
       and  vo.invoice_id = #{invoiceId,jdbcType=VARCHAR}
+    </if>
+    <if test="invoiceCode != null and invoiceCode != ''">
+      and  vo.invoice_code = #{invoiceCode,jdbcType=VARCHAR}
     </if>
     order by id desc
   </select>

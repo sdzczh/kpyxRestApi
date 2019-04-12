@@ -47,13 +47,13 @@ public class ArticleController {
      * @return
      */
     @ResponseBody
-    @RequestMapping("/type/{type}")
-    public String getAll(@PathVariable Integer type, Integer page, Integer rows){
-        page = page == null ? 0 : page;
+    @RequestMapping("/list")
+    public String getAll(Integer type, Integer page, Integer rows){
+        page = page == null ? 0 : page - 1;
         rows = rows == null ? 10 : rows;
         Map<Object, Object> map = new HashMap<>();
         map.put("type", type);
-        map.put("firstResult",page*rows);
+        map.put("firstResult",page * rows);
         map.put("maxResult",rows);
         List<Article> list = articleService.selectPaging(map);
         List<Article> resultList = new LinkedList<>();

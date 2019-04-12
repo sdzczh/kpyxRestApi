@@ -23,7 +23,7 @@ public interface PrizeMapper {
 
     int selectCount(Map<Object, Object> param);
 
-    List<Prize> queryByPhoneIdCardInvoiceId(Map<Object, Object> map);
+    List<Map<String, Object>> queryByPhoneIdCardInvoiceId(Map<Object, Object> map);
 
     List<Map<String, Object>> selectList(Map<Object, Object> map);
 }
