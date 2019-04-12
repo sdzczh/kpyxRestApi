@@ -145,4 +145,20 @@
        and  update_time = #{updateTime,jdbcType=TIMESTAMP}
     </if>
   </select>
+  <select id="queryByPhoneIdCardInvoiceId" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    pr.id, pr.type, vo.phone, vo.invoice_id, vo.id_card_num, pr.number
+    from prize pr left join invoice vo on vo.id = pr.invoice_id
+    where 1=1
+    <if test="idCard != null and idCard != ''">
+      and  vo.id_card_num = #{idCard,jdbcType=VARCHAR}
+    </if>
+    <if test="phone != null and phone != ''">
+      and  vo.phone = #{phone,jdbcType=VARCHAR}
+    </if>
+    <if test="invoiceId != null and invoiceId != ''">
+      and  vo.invoice_id = #{invoiceId,jdbcType=VARCHAR}
+    </if>
+    order by id desc
+  </select>
 </mapper>

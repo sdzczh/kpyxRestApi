@@ -18,7 +18,9 @@ public class Prize implements Serializable {
 
     private Integer invoiceId;
 
-    private Byte type;
+    private Integer type;
+
+    private Integer number;
 
     private Date createTime;
 

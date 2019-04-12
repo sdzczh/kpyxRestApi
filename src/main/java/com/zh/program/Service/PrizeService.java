@@ -81,4 +81,11 @@ public interface PrizeService {
      * @date: 2019-04-11 15:42:24
      **/ 
     int selectCount(Map<Object, Object> param);
+
+    /**
+     * 根据手机号 身份证号 发票编号查询
+     * @param map
+     * @return
+     */
+    List<Prize> queryByPhoneIdCardInvoiceId(Map<Object, Object> map);
 }

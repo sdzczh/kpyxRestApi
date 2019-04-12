@@ -66,4 +66,9 @@ public class PrizeServiceImpl implements PrizeService {
     public int selectCount(Map<Object, Object> param) {
         return this.prizeMapper.selectCount(param);
     }
+
+    @Override
+    public List<Prize> queryByPhoneIdCardInvoiceId(Map<Object, Object> map) {
+        return this.prizeMapper.queryByPhoneIdCardInvoiceId(map);
+    }
 }

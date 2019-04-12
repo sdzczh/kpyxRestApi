@@ -18,5 +18,7 @@ spring:
     allow-bean-definition-overriding: true
 mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 server:
   port: 8081

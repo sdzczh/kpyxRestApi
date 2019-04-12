@@ -22,4 +22,6 @@ public interface PrizeMapper {
     List<Prize> selectPaging(Map<Object, Object> param);
 
     int selectCount(Map<Object, Object> param);
+
+    List<Prize> queryByPhoneIdCardInvoiceId(Map<Object, Object> map);
 }

@@ -99,4 +99,16 @@ public class ProgramApplicationTests {
         System.out.print(result);
     }
 
+    @Test
+    public void queryPrize(){
+        String idCard = "13165373280";
+        String url = webUrl + "prize/queryPrize?invoice_id=&phone=" + idCard;
+        String result = null;
+        try {
+            result = HTTP.get(url, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.print(result);
+    }
 }
