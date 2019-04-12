@@ -1,22 +1,15 @@
 package com.zh.program.Controller;
 
-import com.alibaba.fastjson.JSONObject;
-import com.zh.program.Common.authorization.annotation.Decrypt;
 import com.zh.program.Common.enums.ResultCode;
 import com.zh.program.Dto.Result;
 import com.zh.program.Entrty.Article;
-import com.zh.program.Entrty.User;
 import com.zh.program.Service.ArticleService;
-import com.zh.program.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -55,10 +48,14 @@ public class ArticleController {
      */
     @ResponseBody
     @RequestMapping("/type/{type}")
-    public String getAll(@PathVariable Integer type){
+    public String getAll(@PathVariable Integer type, Integer page, Integer rows){
+        page = page == null ? 0 : page;
+        rows = rows == null ? 10 : rows;
         Map<Object, Object> map = new HashMap<>();
         map.put("type", type);
-        List<Article> list = articleService.selectAll(map);
+        map.put("firstResult",page*rows);
+        map.put("maxResult",rows);
+        List<Article> list = articleService.selectPaging(map);
         List<Article> resultList = new LinkedList<>();
         for(Article article : list){
             Article art = new Article();
