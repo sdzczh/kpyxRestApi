@@ -20,7 +20,9 @@ public class Article implements Serializable {
 
     private String author;
 
-    private Byte type;
+    private Integer type;
+
+    private Integer number;
 
     private Integer clinkNum;
 

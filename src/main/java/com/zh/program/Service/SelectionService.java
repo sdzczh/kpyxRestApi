@@ -63,7 +63,7 @@ public interface SelectionService {
      * 
      * @author: autogeneration
      * @date: 2019-04-11 15:43:48
-     **/ 
+     **/
     List<Selection> selectAll(Map<Object, Object> param);
 
     /**
@@ -81,4 +81,6 @@ public interface SelectionService {
      * @date: 2019-04-11 15:43:48
      **/ 
     int selectCount(Map<Object, Object> param);
+
+    List<Map<String, Object>> selectList(Map<Object, Object> map);
 }

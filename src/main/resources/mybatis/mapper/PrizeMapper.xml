@@ -161,4 +161,14 @@
     </if>
     order by id desc
   </select>
+  <select id="selectList" parameterType="java.util.Map" resultType="java.util.Map">
+    select
+    vo.invoice_id, vo.invoice_code, se.type, se.create_time
+    from prize se left join invoice vo on vo.id = se.invoice_id
+    where 1=1
+    <if test="number != null">
+      and  se.number = #{number,jdbcType=INTEGER}
+    </if>
+    order by se.type asc
+  </select>
 </mapper>

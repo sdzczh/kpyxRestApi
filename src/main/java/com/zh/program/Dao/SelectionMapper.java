@@ -22,4 +22,6 @@ public interface SelectionMapper {
     List<Selection> selectPaging(Map<Object, Object> param);
 
     int selectCount(Map<Object, Object> param);
+
+    List<Map<String, Object>> selectList(Map<Object, Object> map);
 }

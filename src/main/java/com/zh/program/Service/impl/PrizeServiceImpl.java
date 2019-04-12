@@ -71,4 +71,9 @@ public class PrizeServiceImpl implements PrizeService {
     public List<Prize> queryByPhoneIdCardInvoiceId(Map<Object, Object> map) {
         return this.prizeMapper.queryByPhoneIdCardInvoiceId(map);
     }
+
+    @Override
+    public List<Map<String, Object>> selectList(Map<Object, Object> map) {
+        return this.prizeMapper.selectList(map);
+    }
 }

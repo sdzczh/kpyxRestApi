@@ -91,7 +91,7 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from selection
     where 1=1 
@@ -144,5 +144,15 @@
     <if test="updateTime != null">
        and  update_time = #{updateTime,jdbcType=TIMESTAMP}
     </if>
+  </select>
+  <select id="selectList" parameterType="java.util.Map" resultType="java.util.Map">
+    select
+    vo.invoice_id, vo.invoice_code, se.create_time
+    from selection se left join invoice vo on vo.id = se.invoice_id
+    where 1=1
+    <if test="number != null">
+      and  se.number = #{number,jdbcType=TIMESTAMP}
+    </if>
+    order by se.id desc
   </select>
 </mapper>

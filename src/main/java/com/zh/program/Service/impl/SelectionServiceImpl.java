@@ -66,4 +66,9 @@ public class SelectionServiceImpl implements SelectionService {
     public int selectCount(Map<Object, Object> param) {
         return this.selectionMapper.selectCount(param);
     }
+
+    @Override
+    public List<Map<String, Object>> selectList(Map<Object, Object> map) {
+        return this.selectionMapper.selectList(map);
+    }
 }

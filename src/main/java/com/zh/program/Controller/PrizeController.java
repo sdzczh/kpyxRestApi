@@ -1,6 +1,7 @@
 package com.zh.program.Controller;
 
 import com.zh.program.Common.enums.ResultCode;
+import com.zh.program.Common.utils.DateUtils;
 import com.zh.program.Common.utils.StrUtils;
 import com.zh.program.Dto.Result;
 import com.zh.program.Entrty.Banner;
@@ -48,5 +49,22 @@ public class PrizeController {
         }else {
             return Result.toResult(ResultCode.SUCCESS, list);
         }
+    }
+
+    /**
+     * 获取中奖列表
+     * number 期数
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/list")
+    public String getAll(Integer number){
+        if(number == null){
+            return Result.toResult(ResultCode.PARAM_IS_BLANK);
+        }
+        Map<Object, Object> map = new HashMap<>();
+        map.put("number", number);
+        List<Map<String, Object>> list = prizeService.selectList(map);
+        return Result.toResult(ResultCode.SUCCESS, list);
     }
 }
