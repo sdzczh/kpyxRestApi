@@ -31,6 +31,14 @@ public class ValidateUtils {
         String regexTradePwd = "^\\d{6}$";
         return userPwd.matches(regexTradePwd);
     }
+    /**验证是否为身份证号*/
+    public static boolean isIdCard(String idCard){
+        if (StrUtils.isBlank(idCard)){
+            return false;
+        }
+        String regexTradePwd = "^(^[1-9]\\d{7}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}$)|(^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])((\\d{4})|\\d{3}[Xx])$)$";
+        return idCard.matches(regexTradePwd);
+    }
 
     /**验证是否为6位数字的验证码*/
     public static boolean isVerificationCode(String verificationCode){

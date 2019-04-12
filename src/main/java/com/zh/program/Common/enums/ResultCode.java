@@ -9,6 +9,8 @@ public enum ResultCode {
     PARAM_IS_INVALID(10001, "参数无效"),
     PARAM_IS_BLANK(10002, "参数为空"),
     PARAM_TYPE_BIND_ERROR(10003, "参数类型错误"),
+    PARAM_PHONE_ERROR(10004, "手机号格式错误"),
+    PARAM_IDCARD_ERROR(10005, "身份证号格式错误"),
 
     /* 用户错误：20001-29999*/
     USER_NOT_LOGGED_IN(20001, "用户未登录"),
@@ -49,8 +51,8 @@ public enum ResultCode {
     PERMISSION_NO_ACCESS(70001, "功能已关闭"),
     PERMISSION_REGISTER_NO_ACCESS(70002, "注册功能已关闭"),
     PERMISSION_NO_OPEN(70003, "功能暂未开放"),
-
     VCODE_FALSE(70004, "注册验证码错误");
+
 
     private Integer code;
 

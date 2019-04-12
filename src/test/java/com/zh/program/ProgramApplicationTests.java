@@ -1,5 +1,6 @@
 package com.zh.program;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.zh.program.Common.Constants;
 import com.zh.program.Common.encrypt.AES;
@@ -13,11 +14,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ProgramApplicationTests {
-    private static String webUrl = "http://localhost:8080/";
+    private static String webUrl = "http://localhost:8081/";
     private String get(String url,String params,String sign,String token){
         StringBuffer s = new StringBuffer();
         s.append(url)
@@ -68,6 +72,31 @@ public class ProgramApplicationTests {
         String params = AES.encrypt(json.toJSONString(), aesKey);
         String result = post(url, params, null, null, secretKey);
         System.out.println(result);
+    }
+    @Test
+    public void insert() throws Exception {
+        String id_card_num = "370883199409167412";
+        String phone = "13165373280";
+        String amount = "50";
+        String invoice_code = "20";
+        String invoice_id = "55";
+        String code = "hcmb";
+        List<Map<String, Object>> list = new ArrayList<>();
+        for (int i = 0; i < 2;i++) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("invoice_id", invoice_id + i);
+            map.put("invoice_code", invoice_code + i);
+            map.put("amount", amount + i);
+            map.put("phone", phone);
+            map.put("id_card_num", id_card_num);
+            list.add(map);
+        }
+        String data = JSONArray.toJSONString(list);
+        data = BASE64.encoder(data);
+        data = URLEncoder.encode(data, "UTF-8");
+        String url = webUrl + "invoice/insert?code=" + code + "&data=" + data;
+        String result = HTTP.get(url, null);
+        System.out.print(result);
     }
 
 }

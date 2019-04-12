@@ -27,9 +27,9 @@ public class Invoice implements Serializable {
 
     private BigDecimal amount;
 
-    private Byte state;
+    private Integer state;
 
-    private Date createDate;
+    private String createDate;
 
     private Date createTime;
 
