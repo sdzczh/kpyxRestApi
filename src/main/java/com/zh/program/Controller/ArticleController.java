@@ -31,17 +31,21 @@ public class ArticleController {
     /**
      * 根据ID查找
      * @param articleId
-     * @param model
      * @return
      */
+    @ResponseBody
     @RequestMapping("/{articleId}")
-    public String get(@PathVariable Integer articleId, Model model){
-        Map<Object, Object> map = new HashMap();
+    public String get(@PathVariable Integer articleId){
+        if(articleId == null){
+            return Result.toResult(ResultCode.PARAM_IS_BLANK);
+        }
+        Map<Object, Object> map = new HashMap<>();
         map.put("id", articleId);
         List<Article> list = articleService.selectAll(map);
         Article article = list.get(0);
-        model.addAttribute("item",article);
-        return "index.jsp";
+        article.setClinkNum(article.getClinkNum() + 1);
+        articleService.updateByPrimaryKeySelective(article);
+        return Result.toResult(ResultCode.SUCCESS, article);
     }
 
     /**
@@ -62,6 +66,7 @@ public class ArticleController {
             art.setAuthor(article.getAuthor());
             art.setTitle(article.getTitle());
             art.setClinkNum(article.getClinkNum());
+            art.setNumber(article.getNumber());
             art.setUpdateTime(article.getUpdateTime());
             resultList.add(art);
         }
