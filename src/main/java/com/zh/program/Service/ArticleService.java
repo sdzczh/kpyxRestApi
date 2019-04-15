@@ -83,4 +83,6 @@ public interface ArticleService {
     int selectCount(Map<Object, Object> param);
 
     List<Article> selectByIndex(Map<Object, Object> map);
+
+    List<Article> selectGroupByClink(Map<Object, Object> map);
 }

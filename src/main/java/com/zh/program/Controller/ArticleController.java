@@ -40,7 +40,6 @@ public class ArticleController {
         articleService.updateByPrimaryKeySelective(article);
         return Result.toResult(ResultCode.SUCCESS, article);
     }
-
     /**
      * 获取文章列表
      * type 文章类型 0:开奖公告,1:政策法规,2:新闻资讯,3:常见问题,4:通知公告
@@ -72,5 +71,13 @@ public class ArticleController {
         data.put("data", resultList);
         data.put("count", count);
         return Result.toResult(ResultCode.SUCCESS, data);
+    }
+
+    @ResponseBody
+    @RequestMapping("/recommendList")
+    public String recommendList(){
+        Map<Object, Object> map = new HashMap<>();
+        List<Article> list = articleService.selectGroupByClink(map);
+        return Result.toResult(ResultCode.SUCCESS, list);
     }
 }

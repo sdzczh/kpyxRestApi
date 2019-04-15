@@ -163,6 +163,13 @@
     from article
      order by type desc
   </select>
+  <select id="selectGroupByClink" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    id, title
+    from article
+    where 1=1
+    order by clink_num desc
+  </select>
   <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
