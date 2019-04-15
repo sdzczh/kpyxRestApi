@@ -5,19 +5,20 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="video_url" jdbcType="VARCHAR" property="videoUrl" />
+    <result column="img_url" jdbcType="VARCHAR" property="imgUrl" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, title, video_url, create_time, update_time
+    id, title, video_url, img_url, create_time, update_time
   </sql>
   <insert id="insert" parameterType="com.zh.program.Entrty.Videos">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into videos (title, video_url, create_time, 
+    insert into videos (title, video_url,img_url, create_time,
       update_time)
-    values (#{title,jdbcType=VARCHAR}, #{videoUrl,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+    values (#{title,jdbcType=VARCHAR}, #{videoUrl,jdbcType=VARCHAR},#{imgUrl,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.zh.program.Entrty.Videos">
@@ -31,6 +32,9 @@
       </if>
       <if test="videoUrl != null">
         video_url,
+      </if>
+      <if test="imgUrl != null">
+        img_url,
       </if>
       <if test="createTime != null">
         create_time,
@@ -46,6 +50,9 @@
       <if test="videoUrl != null">
         #{videoUrl,jdbcType=VARCHAR},
       </if>
+      <if test="imgUrl != null">
+        #{imgUrl,jdbcType=VARCHAR},
+      </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -58,6 +65,7 @@
     update videos
     set title = #{title,jdbcType=VARCHAR},
       video_url = #{videoUrl,jdbcType=VARCHAR},
+      img_url = #{imgUrl,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
@@ -70,6 +78,9 @@
       </if>
       <if test="videoUrl != null">
         video_url = #{videoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null">
+        img_url = #{imgUrl,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -101,6 +112,9 @@
     <if test="videoUrl != null">
        and  video_url = #{videoUrl,jdbcType=VARCHAR}
     </if>
+    <if test="imgUrl != null">
+       and  img_url = #{imgUrl,jdbcType=VARCHAR}
+    </if>
     <if test="createTime != null">
        and  create_time = #{createTime,jdbcType=TIMESTAMP}
     </if>
@@ -120,6 +134,9 @@
     <if test="videoUrl != null">
        and  video_url = #{videoUrl,jdbcType=VARCHAR}
     </if>
+    <if test="imgUrl != null">
+       and img_url = #{imgUrl,jdbcType=VARCHAR}
+    </if>
     <if test="createTime != null">
        and  create_time = #{createTime,jdbcType=TIMESTAMP}
     </if>
@@ -137,6 +154,9 @@
     </if>
     <if test="videoUrl != null">
        and  video_url = #{videoUrl,jdbcType=VARCHAR}
+    </if>
+    <if test="imgUrl != null">
+       and  img_url = #{imgUrl,jdbcType=VARCHAR}
     </if>
     <if test="createTime != null">
        and  create_time = #{createTime,jdbcType=TIMESTAMP}

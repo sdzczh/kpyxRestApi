@@ -6,19 +6,20 @@
     <result column="type" jdbcType="TINYINT" property="type" />
     <result column="img_url" jdbcType="VARCHAR" property="imgUrl" />
     <result column="href" jdbcType="VARCHAR" property="href" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, type, img_url, href, create_time, update_time
+    id, type, img_url, href, title,create_time, update_time
   </sql>
   <insert id="insert" parameterType="com.zh.program.Entrty.Banner">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into banner (type, img_url, href, 
+    insert into banner (type, img_url, href, title,
       create_time, update_time)
-    values (#{type,jdbcType=TINYINT}, #{imgUrl,jdbcType=VARCHAR}, #{href,jdbcType=VARCHAR}, 
+    values (#{type,jdbcType=TINYINT}, #{imgUrl,jdbcType=VARCHAR}, #{href,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.zh.program.Entrty.Banner">
@@ -35,6 +36,9 @@
       </if>
       <if test="href != null">
         href,
+      </if>
+      <if test="title != null">
+        title,
       </if>
       <if test="createTime != null">
         create_time,
@@ -53,6 +57,9 @@
       <if test="href != null">
         #{href,jdbcType=VARCHAR},
       </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -66,6 +73,7 @@
     set type = #{type,jdbcType=TINYINT},
       img_url = #{imgUrl,jdbcType=VARCHAR},
       href = #{href,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
@@ -81,6 +89,9 @@
       </if>
       <if test="href != null">
         href = #{href,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -115,6 +126,9 @@
     <if test="href != null">
        and  href = #{href,jdbcType=VARCHAR}
     </if>
+    <if test="title != null">
+       and  title = #{title,jdbcType=VARCHAR}
+    </if>
     <if test="createTime != null">
        and  create_time = #{createTime,jdbcType=TIMESTAMP}
     </if>
@@ -137,6 +151,9 @@
     <if test="href != null">
        and  href = #{href,jdbcType=VARCHAR}
     </if>
+    <if test="title != null">
+       and  title = #{title,jdbcType=VARCHAR}
+    </if>
     <if test="createTime != null">
        and  create_time = #{createTime,jdbcType=TIMESTAMP}
     </if>
@@ -157,6 +174,9 @@
     </if>
     <if test="href != null">
        and  href = #{href,jdbcType=VARCHAR}
+    </if>
+    <if test="title != null">
+       and  title = #{title,jdbcType=VARCHAR}
     </if>
     <if test="createTime != null">
        and  create_time = #{createTime,jdbcType=TIMESTAMP}

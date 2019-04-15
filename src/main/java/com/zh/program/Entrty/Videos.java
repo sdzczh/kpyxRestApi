@@ -19,6 +19,7 @@ public class Videos implements Serializable {
     private String title;
 
     private String videoUrl;
+    private String imgUrl;
 
     private Date createTime;
 

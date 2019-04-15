@@ -50,10 +50,12 @@ public class IndexController {
             if(banner.getType() == Constants.BANNER_TYPE_TOP) {
                 banner1.setImgUrl(banner.getImgUrl());
                 banner1.setHref(banner.getHref());
+                banner1.setTitle(banner.getTitle());
                 bannerTopList.add(banner1);
             }else{
                 banner1.setImgUrl(banner.getImgUrl());
                 banner1.setHref(banner.getHref());
+                banner1.setTitle(banner.getTitle());
                 bannerMidList.add(banner1);
             }
         }
