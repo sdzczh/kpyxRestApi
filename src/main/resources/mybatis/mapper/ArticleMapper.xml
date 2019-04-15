@@ -157,6 +157,12 @@
     </if>
      order by id desc 
   </select>
+  <select id="selectByIndex" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    id, title, type, update_time
+    from article
+     order by type desc
+  </select>
   <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

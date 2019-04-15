@@ -24,4 +24,15 @@ public class Constants {
     public static final int STATE_ON = 1;
     //状态 无效
     public static final int STATE_OFF = 0;
+
+    //Banner 顶部位置
+    public static final int BANNER_TYPE_TOP = 0;
+    public static final int BANNER_TYPE_MID = 1;
+
+    //文章类型
+    public static final int ARTICLE_KJGG = 0;
+    public static final int ARTICLE_ZCFG = 1;
+    public static final int ARTICLE_XWZX = 2;
+    public static final int ARTICLE_CJWT = 3;
+    public static final int ARTICLE_TZGG = 4;
 }

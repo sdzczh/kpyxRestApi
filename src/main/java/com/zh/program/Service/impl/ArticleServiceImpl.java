@@ -66,4 +66,9 @@ public class ArticleServiceImpl implements ArticleService {
     public int selectCount(Map<Object, Object> param) {
         return this.articleMapper.selectCount(param);
     }
+
+    @Override
+    public List<Article> selectByIndex(Map<Object, Object> map) {
+        return this.articleMapper.selectByIndex(map);
+    }
 }

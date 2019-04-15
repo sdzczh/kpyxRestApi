@@ -46,7 +46,10 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
 		if(!(handler instanceof HandlerMethod)){
 			return true;
 		}
-		
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		response.setHeader("Access-Control-Allow-Headers", "X-Requested-With,content-type,token");
+		response.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE, TRACE, OPTIONS, PATCH");
+
 		try {
 			log.info("地址---->"+request.getRequestURI());
 			HandlerMethod handlerMethod = (HandlerMethod) handler;

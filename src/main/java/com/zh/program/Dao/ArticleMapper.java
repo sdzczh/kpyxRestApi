@@ -22,4 +22,6 @@ public interface ArticleMapper {
     List<Article> selectPaging(Map<Object, Object> param);
 
     int selectCount(Map<Object, Object> param);
+
+    List<Article> selectByIndex(Map<Object, Object> map);
 }

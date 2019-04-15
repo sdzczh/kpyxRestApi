@@ -56,6 +56,7 @@ public class ArticleController {
         map.put("firstResult",page * rows);
         map.put("maxResult",rows);
         List<Article> list = articleService.selectPaging(map);
+        Integer count = articleService.selectCount(map);
         List<Article> resultList = new LinkedList<>();
         for(Article article : list){
             Article art = new Article();
@@ -67,6 +68,9 @@ public class ArticleController {
             art.setUpdateTime(article.getUpdateTime());
             resultList.add(art);
         }
-        return Result.toResult(ResultCode.SUCCESS, resultList);
+        Map<Object, Object> data = new HashMap<>();
+        data.put("data", resultList);
+        data.put("count", count);
+        return Result.toResult(ResultCode.SUCCESS, data);
     }
 }

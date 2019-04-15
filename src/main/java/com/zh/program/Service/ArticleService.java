@@ -81,4 +81,6 @@ public interface ArticleService {
      * @date: 2019-04-11 15:36:13
      **/ 
     int selectCount(Map<Object, Object> param);
+
+    List<Article> selectByIndex(Map<Object, Object> map);
 }

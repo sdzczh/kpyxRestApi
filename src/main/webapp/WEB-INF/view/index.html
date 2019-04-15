@@ -22,11 +22,8 @@
 </html>
 <script src="../../static/js/jquery.min.js"></script>
 <script type="text/javascript">
-    var obj = document.getElementById("notetext");
-    obj.innerHTML = obj.innerText;//这样重新设置html代码为解析后的格式
-    //请求获取验证码
     function onclickValidateCode(obj){
-        $(obj).attr("src","/validateCode?"+new Date().getTime());
+        $(obj).attr("src","/validateCode?");
     }
 </script>
 </html>
