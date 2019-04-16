@@ -5,6 +5,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -26,7 +27,7 @@ public class ProgramApplication {
         //增加拦截器
         public void addInterceptors(InterceptorRegistry registry){
             registry.addInterceptor(new AuthorizationInterceptor())    //指定拦截器类
-                    .addPathPatterns("/*");        //指定该类拦截的url
+                    .addPathPatterns("/**");        //指定该类拦截的url
         }
     }
 

@@ -1,30 +1,38 @@
 package com.zh.program.Controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.zh.program.Common.Constants;
+import com.zh.program.Common.authorization.annotation.Decrypt;
+import com.zh.program.Common.authorization.annotation.Params;
 import com.zh.program.Common.enums.ResultCode;
 import com.zh.program.Common.utils.DateUtils;
+import com.zh.program.Common.utils.DrawUtils;
 import com.zh.program.Common.utils.StrUtils;
 import com.zh.program.Dto.Result;
 import com.zh.program.Entrty.Banner;
 import com.zh.program.Entrty.Invoice;
 import com.zh.program.Entrty.Prize;
+import com.zh.program.Entrty.Selection;
 import com.zh.program.Service.BannerService;
 import com.zh.program.Service.PrizeService;
+import com.zh.program.Service.SelectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 
 @Controller
 @RequestMapping("/prize")
 public class PrizeController {
     @Autowired
     private PrizeService prizeService;
+    @Autowired
+    private SelectionService selectionService;
 
     /**
      * 查询中奖信息
@@ -70,5 +78,30 @@ public class PrizeController {
         map.put("number", number);
         List<Map<String, Object>> list = prizeService.selectList(map);
         return Result.toResult(ResultCode.SUCCESS, list);
+    }
+
+    /**
+     * 自定义抽奖
+     * @return
+     */
+    @Decrypt
+    @ResponseBody
+    @PostMapping("/draw")
+    public String draw(@Params Object params, HttpServletRequest request){
+        try {
+            params = request.getAttribute(Constants.PARAM);
+            JSONObject json = (JSONObject)params;
+
+            Integer amount = json.getInteger("amount");
+            Integer type = json.getInteger("type");
+            Integer number = json.getInteger("number");
+            /*参数校验*/
+            if(amount == null || number == null || type == null){
+                return Result.toResult(ResultCode.PARAM_IS_BLANK);
+            }
+            return prizeService.draw(amount, type, number);
+        } catch (Exception e) {
+            return Result.toResult(ResultCode.SYSTEM_INNER_ERROR);
+        }
     }
 }

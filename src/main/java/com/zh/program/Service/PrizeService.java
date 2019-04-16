@@ -3,6 +3,7 @@ package com.zh.program.Service;
 import com.zh.program.Entrty.Prize;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 
@@ -90,4 +91,6 @@ public interface PrizeService {
     List<Map<String, Object>> queryByPhoneIdCardInvoiceId(Map<Object, Object> map);
 
     List<Map<String, Object>> selectList(Map<Object, Object> map);
+
+    String draw(Integer amount, Integer type, Integer number);
 }

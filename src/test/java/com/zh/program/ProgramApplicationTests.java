@@ -111,4 +111,21 @@ public class ProgramApplicationTests {
         }
         System.out.print(result);
     }
+
+    @Test
+    public void register() throws Exception{
+        String aesKey = "5274e323bb474c36";
+        String url = webUrl+"prize/draw";
+        String secret_key = RSA.encode(aesKey, RSA.getPublikKey(BASE64.decoderByte(Constants.RSA_PUBLIC_KEY)));
+        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> param = new HashMap<String, Object>();
+        map.put("type", "1");
+        map.put("number", "1");
+        map.put("amount", "3");
+
+        JSONObject json = new JSONObject(map);
+        String params = AES.encrypt(json.toJSONString(), aesKey);
+
+        System.out.println(post(url, params, "", "", secret_key));
+    }
 }
