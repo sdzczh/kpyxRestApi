@@ -20,6 +20,8 @@ public class Selection implements Serializable {
 
     private Integer number;
 
+    private Integer state;
+
     private Date createTime;
 
     private Date updateTime;

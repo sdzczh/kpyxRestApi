@@ -68,6 +68,7 @@ public class DrawScheduled {
             selection = new Selection();
             selection.setInvoiceId(index);
             selection.setNumber(number);
+            selection.setState(Constants.STATE_ON);
             selectionService.insertSelective(selection);
             log.info("插入选中发票信息 ID:" + index);
         }
