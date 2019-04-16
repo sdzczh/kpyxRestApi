@@ -2,10 +2,13 @@ package com.zh.program.Scheduled;
 
 import com.zh.program.Common.Constants;
 import com.zh.program.Common.enums.SysparamKeys;
+import com.zh.program.Common.utils.DateUtils;
 import com.zh.program.Common.utils.DrawUtils;
 import com.zh.program.Entrty.Invoice;
 import com.zh.program.Entrty.Prize;
+import com.zh.program.Entrty.Selection;
 import com.zh.program.Service.InvoiceService;
+import com.zh.program.Service.SelectionService;
 import com.zh.program.Service.SysparamService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +27,10 @@ public class DrawScheduled {
     private SysparamService sysparamService;
     @Autowired
     private InvoiceService invoiceService;
-    @Scheduled(cron = "0/5 * * * * *")
+    @Autowired
+    private SelectionService selectionService;
+
+    @Scheduled(cron = "0 53 11 * * ?")
     public void scheduled(){
         String key = SysparamKeys.DRAW_ON_OFF;
         String state = sysparamService.queryByKey(key);
@@ -38,21 +44,38 @@ public class DrawScheduled {
         }
         Map<Object, Object> map = new HashMap<>();
         map.put("state", Constants.STATE_ON);
+        map.put("createTime", DateUtils.getSomeDay(-30));
         List<Invoice> list = invoiceService.selectAll(map);
         if(list.size() == 0){
             return;
         }
-        Integer start = list.get(0).getId();
+        Integer start = list.get(list.size() - 1).getId();
         //打乱list中元素顺序
         Collections.shuffle(list);
         //中奖名单id
         Set<Integer> set = DrawUtils.draw(Constants.DRAW_PERSON_NUMBER, list.size(), start);
+        map = new HashMap<>();
+        Integer selectCount = selectionService.selectCount(map);
+        Selection selection = selectionService.selectByPrimaryKey(selectCount);
+        int number;
+        if(selection == null){
+            number = 1;
+        }else{
+            number = selection.getNumber() + 1;
+        }
         for(Integer index : set){
-            Invoice invoice = new Invoice();
-            invoice = list.get(index);
-            Prize prize = new Prize();
-            prize.setInvoiceId(index);
-            prize.setType(Constants.DRAW_SELECTION);
+            //插入选中表
+            selection = new Selection();
+            selection.setInvoiceId(index);
+            selection.setNumber(number);
+            selectionService.insertSelective(selection);
+            log.info("插入选中发票信息 ID:" + index);
+        }
+        for(int i = start; i < list.size() + start; i++){
+            //更改发票状态
+            Invoice invoice = invoiceService.selectByPrimaryKey(i);
+            invoice.setState(Constants.STATE_OFF);
+            invoiceService.updateByPrimaryKeySelective(invoice);
         }
 
     }

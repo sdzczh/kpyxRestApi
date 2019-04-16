@@ -52,7 +52,7 @@ public class InvoiceController {
     public String insert(String data, HttpServletRequest request, String code, String time){
 //        String validateCode = String.valueOf(request.getSession().getAttribute(VALIDATE_CODE));
         String validateCode = RedisUtil.searchString(redis, "kpyx:" + Constants.VALIDATE_CODE + time);
-        if(!validateCode.equals(code)){
+        if(!validateCode.equalsIgnoreCase(code)){
             return Result.toResult(ResultCode.SMS_CHECK_ERROR);
         }
         if(StrUtils.isBlank(data)){

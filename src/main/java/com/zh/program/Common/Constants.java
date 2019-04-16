@@ -37,9 +37,23 @@ public class Constants {
     public static final int ARTICLE_TZGG = 4;
 
     //中奖人数
-    public static final int DRAW_PERSON_NUMBER = 200;
+    public static final int DRAW_PERSON_NUMBER = 5;
 
-    public static final int DRAW_SELECTION = 0;
+    //抽奖入围
+    public static final int DRAW_IN_TEDENGJIANG = 0;
+    public static final int DRAW_IN_YIDENGJIANG = 1;
+    public static final int DRAW_IN_ERDENGJIANG = 2;
+    public static final int DRAW_IN_SANDENGJIANG = 3;
+    public static final int DRAW_IN_SIDENGJIANG_ONE = 4;
+    public static final int DRAW_IN_SIDENGJIANG_TWO = 5;
+    public static final int DRAW_IN_SIDENGJIANG_THREE = 6;
+    public static final int DRAW_IN_SIDENGJIANG_FOUR = 7;
+    public static final int DRAW_IN_LUCKY = 8;
+    public static final int DRAW_IN_SELECTION = 9;
+    public static final int DRAW_OUT_YIDENGJIANG = 10;
+    public static final int DRAW_OUT_ERDENGJIANG = 11;
+    public static final int DRAW_OUT_SANDENGJIANG = 12;
+    public static final int DRAW_OUT_ENJOY = 13;
 
     public static final String VALIDATE_CODE = "validateCode:";
 

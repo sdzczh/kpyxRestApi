@@ -14,10 +14,11 @@ public class DrawUtils {
      * @return
      */
     public static Set<Integer> draw(Integer number, Integer size, Integer start){
-        Random rdom = new Random();
+        Integer rangeR = size + start - 1;
+        Random random = new Random();
         Set<Integer> set = new HashSet<>();
         for (int i = start; i < size + start; i++) {
-            int index = rdom.nextInt(size);
+            int index = random.nextInt(rangeR) % (rangeR - start + 1) + start;
             set.add(index);
             if(set.size() == number){
                 break;
