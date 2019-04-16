@@ -11,6 +11,7 @@ public enum ResultCode {
     PARAM_TYPE_BIND_ERROR(10003, "参数类型错误"),
     PARAM_PHONE_ERROR(10004, "手机号格式错误"),
     PARAM_IDCARD_ERROR(10005, "身份证号格式错误"),
+    PARAM_IMG_BLANK(10006, "请上传图片"),
 
     /* 用户错误：20001-29999*/
     USER_NOT_LOGGED_IN(20001, "用户未登录"),

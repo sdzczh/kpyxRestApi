@@ -15,6 +15,12 @@
             <a onclick="sub()">提交</a>
         </div>
     </li>
+    <li>
+        <div class="form-group">
+                <label class="col-sm-2 control-label">图片:</label>
+                <input type="file" name="logoFile" id="logoFile" onchange="setImg(this);">
+        </div>
+    </li>
 </ul>
 </body>
 </html>
@@ -36,6 +42,43 @@
             alert(result)
         }
         )
+    }
+
+
+    function setImg(obj){
+        var f=$(obj).val();
+        alert(f);
+        console.log(obj);
+        if(f == null || f ==undefined || f == ''){
+            return false;
+        }
+        if(!/\.(?:png|jpg|bmp|gif|PNG|JPG|BMP|GIF)$/.test(f))
+        {
+            alert("类型必须是图片(.png|jpg|bmp|gif|PNG|JPG|BMP|GIF)");
+            $(obj).val('');
+            return false;
+        }
+        var data = new FormData();
+        console.log(data);
+        $.each($(obj)[0].files,function(i,file){
+            data.append('file', file);
+        });
+        console.log(data);
+        $.ajax({
+            type: "POST",
+            url:"/file/upload",
+            data: data,
+            cache: false,
+            contentType: false,    //不可缺
+            processData: false,    //不可缺
+            dataType:"json",
+            success: function(ret) {
+                console.log(ret);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("上传失败，请检查网络后重试");
+            }
+        });
     }
 </script>
 </html>
