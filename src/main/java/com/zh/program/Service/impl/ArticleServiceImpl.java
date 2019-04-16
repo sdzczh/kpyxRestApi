@@ -76,4 +76,9 @@ public class ArticleServiceImpl implements ArticleService {
     public List<Article> selectGroupByClink(Map<Object, Object> map) {
         return this.articleMapper.selectGroupByClink(map);
     }
+
+    @Override
+    public List<Article> selectDrawNotice(Map<Object, Object> map) {
+        return this.articleMapper.selectDrawNotice(map);
+    }
 }

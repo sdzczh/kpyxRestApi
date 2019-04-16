@@ -170,6 +170,13 @@
     where 1=1
     order by clink_num desc
   </select>
+  <select id="selectDrawNotice" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    id, title, author, type, update_time, clink_num
+    from article
+    where type=0 or type=5
+    order by id desc
+  </select>
   <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

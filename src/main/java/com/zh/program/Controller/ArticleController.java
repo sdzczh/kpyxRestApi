@@ -80,4 +80,12 @@ public class ArticleController {
         List<Article> list = articleService.selectGroupByClink(map);
         return Result.toResult(ResultCode.SUCCESS, list);
     }
+    @ResponseBody
+
+    @RequestMapping("/drawNotice")
+    public String drawNotice(){
+        Map<Object, Object> map = new HashMap<>();
+        List<Article> list = articleService.selectDrawNotice(map);
+        return Result.toResult(ResultCode.SUCCESS, list);
+    }
 }

@@ -26,4 +26,6 @@ public interface ArticleMapper {
     List<Article> selectByIndex(Map<Object, Object> map);
 
     List<Article> selectGroupByClink(Map<Object, Object> map);
+
+    List<Article> selectDrawNotice(Map<Object, Object> map);
 }

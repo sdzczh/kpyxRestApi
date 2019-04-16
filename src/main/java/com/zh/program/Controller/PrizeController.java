@@ -26,6 +26,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
+/**
+ * 中奖名单
+ */
 @Controller
 @RequestMapping("/prize")
 public class PrizeController {
