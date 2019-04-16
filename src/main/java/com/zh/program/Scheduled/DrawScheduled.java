@@ -39,15 +39,20 @@ public class DrawScheduled {
         Map<Object, Object> map = new HashMap<>();
         map.put("state", Constants.STATE_ON);
         List<Invoice> list = invoiceService.selectAll(map);
+        if(list.size() == 0){
+            return;
+        }
+        Integer start = list.get(0).getId();
         //打乱list中元素顺序
         Collections.shuffle(list);
         //中奖名单id
-        Set<Integer> set = DrawUtils.draw(Constants.DRAW_PERSON_NUMBER, list.size());
+        Set<Integer> set = DrawUtils.draw(Constants.DRAW_PERSON_NUMBER, list.size(), start);
         for(Integer index : set){
             Invoice invoice = new Invoice();
             invoice = list.get(index);
             Prize prize = new Prize();
             prize.setInvoiceId(index);
+            prize.setType(Constants.DRAW_SELECTION);
         }
 
     }

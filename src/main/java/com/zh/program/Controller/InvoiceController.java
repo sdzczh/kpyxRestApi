@@ -6,6 +6,7 @@ import com.zh.program.Common.Constants;
 import com.zh.program.Common.encrypt.BASE64;
 import com.zh.program.Common.enums.ResultCode;
 import com.zh.program.Common.utils.DateUtils;
+import com.zh.program.Common.utils.RedisUtil;
 import com.zh.program.Common.utils.StrUtils;
 import com.zh.program.Common.utils.ValidateUtils;
 import com.zh.program.Dto.Result;
@@ -14,6 +15,7 @@ import com.zh.program.Entrty.Invoice;
 import com.zh.program.Service.ArticleService;
 import com.zh.program.Service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,6 +40,8 @@ public class InvoiceController {
 
     @Autowired
     private InvoiceService invoiceService;
+    @Autowired
+    private RedisTemplate<String, String> redis;
 
     /**
      * 发票录入
@@ -45,11 +49,12 @@ public class InvoiceController {
      */
     @ResponseBody
     @RequestMapping("/insert")
-    public String insert(String data, HttpServletRequest request, String code){
-        /*String validateCode = String.valueOf(request.getSession().getAttribute(VALIDATE_CODE));
+    public String insert(String data, HttpServletRequest request, String code, String time){
+//        String validateCode = String.valueOf(request.getSession().getAttribute(VALIDATE_CODE));
+        String validateCode = RedisUtil.searchString(redis, "kpyx:" + Constants.VALIDATE_CODE + time);
         if(!validateCode.equals(code)){
-            Result.toResult(ResultCode.SMS_CHECK_ERROR);
-        }*/
+            return Result.toResult(ResultCode.SMS_CHECK_ERROR);
+        }
         if(StrUtils.isBlank(data)){
             return Result.toResult(ResultCode.PARAM_IS_BLANK);
         }

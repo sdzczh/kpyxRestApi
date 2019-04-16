@@ -39,4 +39,9 @@ public class Constants {
     //中奖人数
     public static final int DRAW_PERSON_NUMBER = 200;
 
+    public static final int DRAW_SELECTION = 0;
+
+    public static final String VALIDATE_CODE = "validateCode:";
+
+
 }

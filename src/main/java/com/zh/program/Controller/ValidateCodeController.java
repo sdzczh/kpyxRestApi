@@ -1,5 +1,9 @@
 package com.zh.program.Controller;
 
+import com.zh.program.Common.Constants;
+import com.zh.program.Common.utils.RedisUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -14,7 +18,8 @@ import java.util.Random;
 
 @Controller
 public class ValidateCodeController {
-    private static final String VALIDATE_CODE = "validateCode";
+    @Autowired
+    private RedisTemplate<String, String> redis;
     private int w = 70;
     private int h = 23;
 
@@ -28,12 +33,12 @@ public class ValidateCodeController {
      */
     @RequestMapping(value = "/validateCode")
     public void validateCode(HttpServletRequest request,
-                             HttpServletResponse response) throws Exception {
-        createImage(request,response);
+                             HttpServletResponse response, String time) throws Exception {
+        createImage(request,response, time);
     }
 
 
-    private void createImage(HttpServletRequest request,HttpServletResponse response) throws IOException {
+    private void createImage(HttpServletRequest request, HttpServletResponse response, String time) throws IOException {
         response.setHeader("Pragma", "no-cache");
         response.setHeader("Cache-Control", "no-cache");
         response.setDateHeader("Expires", 0);
@@ -51,7 +56,8 @@ public class ValidateCodeController {
          * 生成字符
          */
         String s = createCharacter(g);
-        request.getSession().setAttribute(VALIDATE_CODE, s);
+        RedisUtil.addString(redis, "kpyx:" + Constants.VALIDATE_CODE + time, 60, s);
+//        request.getSession().setAttribute(VALIDATE_CODE + time, s);
 
         g.dispose();
         OutputStream out = response.getOutputStream();
