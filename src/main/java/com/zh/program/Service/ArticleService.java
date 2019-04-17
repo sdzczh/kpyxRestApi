@@ -92,4 +92,6 @@ public interface ArticleService {
      * @return
      */
     List<Article> selectDrawNotice(Map<Object, Object> map);
+
+    Integer selectCountDrawNotice(Map<Object, Object> map);
 }

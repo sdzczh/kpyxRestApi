@@ -92,5 +92,19 @@ public interface PrizeService {
 
     List<Map<String, Object>> selectList(Map<Object, Object> map);
 
+    /**
+     * 自定义抽奖
+     * @param amount  中奖数量
+     * @param type  奖品类型
+     * @param number 期数
+     * @return
+     */
     String draw(Integer amount, Integer type, Integer number);
+
+    /**
+     * 获取期数列
+     * @param map
+     * @return
+     */
+    List<Map<String, Object>> getNumberList(Map<Object, Object> map);
 }

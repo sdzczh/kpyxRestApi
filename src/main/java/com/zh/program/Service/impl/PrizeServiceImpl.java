@@ -128,4 +128,9 @@ public class PrizeServiceImpl implements PrizeService {
         }
         return Result.toResult(ResultCode.SUCCESS, data);
     }
+
+    @Override
+    public List<Map<String, Object>> getNumberList(Map<Object, Object> map) {
+        return this.prizeMapper.getNumberList(map);
+    }
 }

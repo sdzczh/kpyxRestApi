@@ -174,4 +174,7 @@
     </if>
     order by se.type asc
   </select>
+  <select id="getNumberList" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT DISTINCT number FROM selection
+  </select>
 </mapper>

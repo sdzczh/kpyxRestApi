@@ -84,6 +84,26 @@ public class PrizeController {
     }
 
     /**
+     * 获取期数
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/getNumber")
+    public String getNumber(){
+        Map<Object, Object> map = new HashMap<>();
+        List<Map<String, Object>> list = prizeService.getNumberList(map);
+        Integer number;
+        if(list.size() != 0){
+            number = (Integer) list.get(list.size() - 1).get("number");
+        }else{
+            number = 1;
+        }
+        Map<Object, Object> data = new HashMap<>();
+        data.put("number", number);
+        return Result.toResult(ResultCode.SUCCESS, data);
+    }
+
+    /**
      * 自定义抽奖
      * @return
      */

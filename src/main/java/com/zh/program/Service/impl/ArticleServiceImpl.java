@@ -81,4 +81,9 @@ public class ArticleServiceImpl implements ArticleService {
     public List<Article> selectDrawNotice(Map<Object, Object> map) {
         return this.articleMapper.selectDrawNotice(map);
     }
+
+    @Override
+    public Integer selectCountDrawNotice(Map<Object, Object> map) {
+        return this.articleMapper.selectCountDrawNotice(map);
+    }
 }

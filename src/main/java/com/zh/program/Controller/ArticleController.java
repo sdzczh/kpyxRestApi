@@ -83,9 +83,17 @@ public class ArticleController {
     @ResponseBody
 
     @RequestMapping("/drawNotice")
-    public String drawNotice(){
+    public String drawNotice(Integer page, Integer rows){
+        page = page == null ? 0 : page - 1;
+        rows = rows == null ? 10 : rows;
         Map<Object, Object> map = new HashMap<>();
+        map.put("firstResult",page * rows);
+        map.put("maxResult",rows);
         List<Article> list = articleService.selectDrawNotice(map);
-        return Result.toResult(ResultCode.SUCCESS, list);
+        Integer count = articleService.selectCountDrawNotice(map);
+        Map<Object, Object> data = new HashMap<>();
+        data.put("data", list);
+        data.put("count", count);
+        return Result.toResult(ResultCode.SUCCESS, data);
     }
 }

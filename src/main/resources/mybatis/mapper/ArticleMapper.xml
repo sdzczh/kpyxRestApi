@@ -175,7 +175,7 @@
     id, title, author, type, update_time, clink_num
     from article
     where type=0 or type=5
-    order by id desc
+    order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
   </select>
   <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
     select 
@@ -230,5 +230,10 @@
     <if test="content != null">
        and  content = #{content,jdbcType=LONGVARCHAR}
     </if>
+  </select>
+  <select id="selectCountDrawNotice" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*)
+    from article
+    where type=0 or type=5
   </select>
 </mapper>

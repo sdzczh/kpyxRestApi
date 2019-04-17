@@ -26,4 +26,6 @@ public interface PrizeMapper {
     List<Map<String, Object>> queryByPhoneIdCardInvoiceId(Map<Object, Object> map);
 
     List<Map<String, Object>> selectList(Map<Object, Object> map);
+
+    List<Map<String, Object>> getNumberList(Map<Object, Object> map);
 }

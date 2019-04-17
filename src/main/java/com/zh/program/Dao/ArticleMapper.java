@@ -28,4 +28,6 @@ public interface ArticleMapper {
     List<Article> selectGroupByClink(Map<Object, Object> map);
 
     List<Article> selectDrawNotice(Map<Object, Object> map);
+
+    Integer selectCountDrawNotice(Map<Object, Object> map);
 }
