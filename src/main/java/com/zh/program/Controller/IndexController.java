@@ -5,9 +5,11 @@ import com.zh.program.Common.enums.ResultCode;
 import com.zh.program.Dto.Result;
 import com.zh.program.Entrty.Article;
 import com.zh.program.Entrty.Banner;
+import com.zh.program.Entrty.FriendshipLink;
 import com.zh.program.Entrty.Videos;
 import com.zh.program.Service.ArticleService;
 import com.zh.program.Service.BannerService;
+import com.zh.program.Service.FriendshipLinkService;
 import com.zh.program.Service.VideosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +31,8 @@ public class IndexController {
     private ArticleService articleService;
     @Autowired
     private VideosService videosService;
+    @Autowired
+    private FriendshipLinkService friendshipLinkService;
 
     /**
      * 获取banner列表
@@ -93,5 +97,24 @@ public class IndexController {
             break;
         }
         return Result.toResult(ResultCode.SUCCESS, data);
+    }
+
+    /**
+     * 获取友情链接
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/friendshipLink")
+    public String getAll(){
+        Map<Object, Object> map = new HashMap<>();
+        List<FriendshipLink> list = friendshipLinkService.selectAll(map);
+        FriendshipLink friendshipLink = new FriendshipLink();
+        List<FriendshipLink> links = new LinkedList<>();
+        for(FriendshipLink friendshipLink1 : list){
+            friendshipLink.setHref(friendshipLink1.getHref());
+            friendshipLink.setTitle(friendshipLink1.getTitle());
+            links.add(friendshipLink);
+        }
+        return Result.toResult(ResultCode.SUCCESS, links);
     }
 }
