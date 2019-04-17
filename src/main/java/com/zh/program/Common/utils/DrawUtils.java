@@ -9,17 +9,20 @@ public class DrawUtils {
     /**
      * 根据起始数和数量 抽取一定个数的方法
      * @param number  抽取目标数量
-     * @param size  个数
-     * @param start 起始数
+     * @param list 集
      * @return
      */
-    public static Set<Integer> draw(Integer number, Integer size, Integer start){
-        Integer rangeR = size + start - 1;
+    public static Set<Integer> draw(Integer number, List<Integer> list){
         Random random = new Random();
         Set<Integer> set = new HashSet<>();
-        for (int i = start; i < size + start; i++) {
-            int index = random.nextInt(rangeR) % (rangeR - start + 1) + start;
-            set.add(index);
+        int size = list.size();
+        for (int i = 0; i < size; i++) {
+            int index = random.nextInt(list.size());
+            if(set.contains(list.get(index))){
+                i--;
+            }else {
+                set.add(list.get(index));
+            }
             if(set.size() == number){
                 break;
             }

@@ -5,11 +5,12 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="invoice_id" jdbcType="INTEGER" property="invoiceId" />
     <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="number" jdbcType="INTEGER" property="number" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, invoice_id, type, create_time, update_time
+    id, invoice_id, type, create_time, update_time, number
   </sql>
   <insert id="insert" parameterType="com.zh.program.Entrty.Prize">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -32,6 +33,9 @@
       <if test="type != null">
         type,
       </if>
+      <if test="number != null">
+        number,
+      </if>
       <if test="createTime != null">
         create_time,
       </if>
@@ -46,6 +50,9 @@
       <if test="type != null">
         #{type,jdbcType=TINYINT},
       </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -58,6 +65,7 @@
     update prize
     set invoice_id = #{invoiceId,jdbcType=INTEGER},
       type = #{type,jdbcType=TINYINT},
+      number = #{number,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
@@ -70,6 +78,9 @@
       </if>
       <if test="type != null">
         type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -101,6 +112,9 @@
     <if test="type != null">
        and  type = #{type,jdbcType=TINYINT}
     </if>
+    <if test="number != null">
+       and  number = #{number,jdbcType=TINYINT}
+    </if>
     <if test="createTime != null">
        and  create_time = #{createTime,jdbcType=TIMESTAMP}
     </if>
@@ -120,6 +134,9 @@
     <if test="type != null">
        and  type = #{type,jdbcType=TINYINT}
     </if>
+    <if test="number != null">
+       and  number = #{number,jdbcType=INTEGER}
+    </if>
     <if test="createTime != null">
        and  create_time = #{createTime,jdbcType=TIMESTAMP}
     </if>
@@ -137,6 +154,9 @@
     </if>
     <if test="type != null">
        and  type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="number != null">
+       and  number = #{number,jdbcType=INTEGER}
     </if>
     <if test="createTime != null">
        and  create_time = #{createTime,jdbcType=TIMESTAMP}

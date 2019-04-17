@@ -101,9 +101,12 @@ public class PrizeServiceImpl implements PrizeService {
         if(list.size() == 0){
             return Result.toResult(ResultCode.RESULE_DATA_NONE);
         }
-        Integer start = list.get(list.size() - 1).getId();
+        List<Integer> drawList = new LinkedList<>();
+        for(Selection selection : list){
+            drawList.add(selection.getId());
+        }
         //中奖名单id
-        Set<Integer> set = DrawUtils.draw(amount, list.size(), start);
+        Set<Integer> set = DrawUtils.draw(amount, drawList);
         List<Map<String, Object>> data = new ArrayList<>();
         for(Integer index : set){
             Map<String, Object> result = new HashMap<>();
@@ -124,6 +127,7 @@ public class PrizeServiceImpl implements PrizeService {
             result.put("number", number);
             result.put("invoiceCode", invoice.getInvoiceCode());
             result.put("invoiceId", invoice.getInvoiceId());
+            result.put("phone", invoice.getPhone());
             data.add(result);
         }
         return Result.toResult(ResultCode.SUCCESS, data);

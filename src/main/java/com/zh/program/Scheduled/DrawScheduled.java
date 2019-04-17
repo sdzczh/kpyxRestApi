@@ -49,11 +49,15 @@ public class DrawScheduled {
         if(list.size() == 0){
             return;
         }
+        List<Integer> selectList = new LinkedList<>();
+        for(Invoice invoice : list){
+            selectList.add(invoice.getId());
+        }
         Integer start = list.get(list.size() - 1).getId();
         //打乱list中元素顺序
         Collections.shuffle(list);
         //中奖名单id
-        Set<Integer> set = DrawUtils.draw(Constants.DRAW_PERSON_NUMBER, list.size(), start);
+        Set<Integer> set = DrawUtils.draw(Constants.DRAW_PERSON_NUMBER, selectList);
         map = new HashMap<>();
         Integer selectCount = selectionService.selectCount(map);
         Selection selection = selectionService.selectByPrimaryKey(selectCount);

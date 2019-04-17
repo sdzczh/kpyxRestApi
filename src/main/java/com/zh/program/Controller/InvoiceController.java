@@ -51,10 +51,12 @@ public class InvoiceController {
     @RequestMapping("/insert")
     public String insert(String data, HttpServletRequest request, String code, String time){
 //        String validateCode = String.valueOf(request.getSession().getAttribute(VALIDATE_CODE));
-        String validateCode = RedisUtil.searchString(redis, "kpyx:" + Constants.VALIDATE_CODE + time);
-        if(!validateCode.equalsIgnoreCase(code)){
+        String key = "kpyx:" + Constants.VALIDATE_CODE + time;
+        String validateCode = RedisUtil.searchString(redis, key);
+        if(StrUtils.isBlank(validateCode) || !validateCode.equalsIgnoreCase(code)){
             return Result.toResult(ResultCode.SMS_CHECK_ERROR);
         }
+        RedisUtil.deleteString(redis, key);
         if(StrUtils.isBlank(data)){
             return Result.toResult(ResultCode.PARAM_IS_BLANK);
         }

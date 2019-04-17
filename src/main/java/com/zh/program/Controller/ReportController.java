@@ -45,28 +45,17 @@ public class ReportController {
      */
     @ResponseBody
     @RequestMapping("/insert")
-    public String insert(String data, String code, String time, @RequestParam("img_file") MultipartFile img_file){
-        String validateCode = RedisUtil.searchString(redis, "kpyx:" + Constants.VALIDATE_CODE + time);
+    public String insert(String data, String code, String time){
+        String key = "kpyx:" + Constants.VALIDATE_CODE + time;
+        String validateCode = RedisUtil.searchString(redis, key);
         //验证码错误
-        if(!validateCode.equalsIgnoreCase(code)){
+        if(StrUtils.isBlank(validateCode) || !validateCode.equalsIgnoreCase(code)){
             return Result.toResult(ResultCode.SMS_CHECK_ERROR);
         }
+        RedisUtil.deleteString(redis, key);
         //数据为空
         if(StrUtils.isBlank(data)){
             return Result.toResult(ResultCode.PARAM_IS_BLANK);
-        }
-        //图片为空
-        if (img_file.isEmpty()) {
-            return Result.toResult(ResultCode.PARAM_IMG_BLANK);
-        }
-
-        String fileName = img_file.getOriginalFilename();
-        String filePath = "i:/img/";
-        File dest = new File(filePath + fileName);
-        try {
-            img_file.transferTo(dest);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
         }
         JSONObject jsonObject = null;
         try {
@@ -85,7 +74,7 @@ public class ReportController {
         String economic_nature = jsonObject.getString("economic_nature");
         String prove_information = jsonObject.getString("prove_information");
         String content = jsonObject.getString("content");
-        String imgUrl = filePath + fileName;
+        String imgUrl = jsonObject.getString("img_url");
         //验证手机号
         if(!ValidateUtils.isPhone(phone)){
             return Result.toResult(ResultCode.PARAM_PHONE_ERROR);

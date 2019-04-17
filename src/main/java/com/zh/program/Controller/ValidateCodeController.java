@@ -56,7 +56,7 @@ public class ValidateCodeController {
          * 生成字符
          */
         String s = createCharacter(g);
-        RedisUtil.addString(redis, "kpyx:" + Constants.VALIDATE_CODE + time, 60, s);
+        RedisUtil.addString(redis, "kpyx:" + Constants.VALIDATE_CODE + time, 300, s);
 //        request.getSession().setAttribute(VALIDATE_CODE + time, s);
 
         g.dispose();
