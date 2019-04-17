@@ -131,6 +131,9 @@
     <include refid="Base_Column_List" />
     from article
     where 1=1 
+    <if test="id != null">
+       and  id = #{id,jdbcType=VARCHAR}
+    </if>
     <if test="title != null">
        and  title = #{title,jdbcType=VARCHAR}
     </if>
@@ -172,7 +175,7 @@
   </select>
   <select id="selectDrawNotice" parameterType="java.util.Map" resultMap="BaseResultMap">
     select
-    id, title, author, type, update_time, clink_num
+    id, title, author, type, update_time, clink_num, number
     from article
     where type=0 or type=5
     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}

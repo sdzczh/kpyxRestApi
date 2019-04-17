@@ -32,10 +32,7 @@ public class ArticleController {
         if(articleId == null){
             return Result.toResult(ResultCode.PARAM_IS_BLANK);
         }
-        Map<Object, Object> map = new HashMap<>();
-        map.put("id", articleId);
-        List<Article> list = articleService.selectAll(map);
-        Article article = list.get(0);
+        Article article = articleService.selectByPrimaryKey(articleId);
         article.setClinkNum(article.getClinkNum() + 1);
         articleService.updateByPrimaryKeySelective(article);
         return Result.toResult(ResultCode.SUCCESS, article);
