@@ -37,7 +37,7 @@ public class Constants {
     public static final int ARTICLE_TZGG = 4;
 
     //中奖人数
-    public static final int DRAW_PERSON_NUMBER = 5;
+    public static final int DRAW_PERSON_NUMBER = 8;
 
     //抽奖入围
     public static final int DRAW_IN_TEDENGJIANG = 0;

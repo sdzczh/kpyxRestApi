@@ -48,10 +48,10 @@ public class PrizeController {
     @RequestMapping("/queryPrize")
     public String queryPrize(String id_card, String phone, String invoice_id, String invoice_code){
         if(StrUtils.isBlank(id_card) && StrUtils.isBlank(phone) && StrUtils.isBlank(invoice_id) && StrUtils.isBlank(invoice_code)){
-            Result.toResult(ResultCode.PARAM_IS_BLANK);
+            return Result.toResult(ResultCode.PARAM_IS_BLANK);
         }
         if((!StrUtils.isBlank(invoice_id) && StrUtils.isBlank(invoice_code)) || StrUtils.isBlank(invoice_id) && !StrUtils.isBlank(invoice_code)){
-            Result.toResult(ResultCode.PARAM_IS_BLANK);
+            return Result.toResult(ResultCode.PARAM_IS_BLANK);
         }
         Map<Object, Object> map = new HashMap<>();
         map.put("idCard", id_card);
