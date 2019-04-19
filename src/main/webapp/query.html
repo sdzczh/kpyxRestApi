@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="favicon.ico">
+    <title>开票有喜网</title>
+    <link rel="stylesheet" href="./js/bootstrap-3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./js/layui/css/layui.css">
+    <link rel="stylesheet" href="./css/public.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-default sp-navbar">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav"
+                    aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="navbar-header-t clearfix">
+                    <a class="navbar-brand pull-left" href="/">
+                        <img src="./images/logo.png" alt="">
+                    </a>
+                    <div class="navbar-phone clearfix pull-right hidden-xs">
+                        <i class="icon pull-left"></i>
+                        <span class="pull-left">0537-2288888</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="navbar-toolbar">
+            <div class="container">
+                <div class="collapse navbar-collapse" id="nav">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">网站首页</a></li>
+                        <li><a href="/notice.html">开奖公告</a></li>
+                        <li><a href="/new.html?type=1">政策法规</a></li>
+                        <li><a href="/new.html?type=2">新闻资讯</a></li>
+                        <li><a href="/report.html">涉税举报</a></li>
+                        <li><a href="/invoice-entry.html">发票录入</a></li>
+                        <!-- <li><a href="#">开奖视频</a></li> -->
+                        <li><a href="/new.html?type=3">常见问题</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="banner">
+        <img src="./images/banner.png" class="img-responsive" alt="">
+    </div>
+
+    <div class="container">
+        <div class="sp-breadcrumb clearfix">
+            <i class="glyphicon glyphicon-home pull-left"></i>
+            <ol class="sp-breadcrumb-list pull-left clearfix">
+                <li class="pull-left">您的位置：</li>
+                <li class="pull-left"><a href="/">首页</a></li>
+                <li class="pull-left"><i class="glyphicon glyphicon-menu-right"></i></li>
+                <li class="pull-left" class="active">中奖查询</li>
+            </ol>
+        </div>
+        <div class="sp-query-content col-md-4 col-md-offset-4">
+            <div class="tab-title row text-center">
+                <div class="tab-item active col-xs-6" data-index="0">手机号查询</div>
+                <div class="tab-item col-xs-6" data-index="1">发票号码查询</div>
+            </div>
+            <div class="tab-content" data-tabs="0">
+                <form id="query-form-phone" class="layui-form sp-form clearfix" action="">
+                    <div class="layui-form-item">
+                        <div class="form-label col-sm-3 hidden-xs">
+                            <label class="layui-form-label">手机号码：</label>
+                        </div>
+                        <div class="col-sm-9 layui-input-block">
+                            <input type="text" name="phone" lay-verType="tips" lay-verify="phone" placeholder="输入手机号码"
+                                autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="form-label col-sm-3 hidden-xs">
+                            <label class="layui-form-label">验证码：</label>
+                        </div>
+                        <div class="col-sm-4 col-xs-5 layui-input-block mt-npr">
+                            <input type="text" name="code" lay-verType="tips" lay-verify="required" placeholder="输入验证码"
+                                autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="col-sm-5 col-xs-7 code-wrap">
+                            <img data-validate-code="1" data-code-refresh="1" src="" alt="">
+                            <span data-code-refresh="1">刷新</span>
+                        </div>
+                    </div>
+                    <div class="text-center sp-query-btn">
+                        <button class="btn btn-danger" lay-submit lay-filter="phone">查询</button>
+                    </div>
+                </form>
+            </div>
+            <div class="tab-content" style="display: none" data-tabs="1">
+                <form id="query-form-code" class="layui-form sp-form clearfix" action="">
+                    <div class="layui-form-item">
+                        <div class="form-label col-sm-3 hidden-xs">
+                            <label class="layui-form-label">发票号码：</label>
+                        </div>
+                        <div class="col-sm-9 layui-input-block">
+                            <input type="text" name="invoice_id" lay-verType="tips" lay-verify="required" placeholder="输入8位发票号码"
+                                autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="form-label col-sm-3 hidden-xs">
+                            <label class="layui-form-label">验证码：</label>
+                        </div>
+                        <div class="col-sm-4 col-xs-5 layui-input-block mt-npr">
+                            <input type="text" name="code" lay-verType="tips" lay-verify="required" placeholder="输入验证码"
+                                autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="col-sm-5 col-xs-7 code-wrap">
+                            <img data-validate-code="1" data-code-refresh="1" src="" alt="">
+                            <span data-code-refresh="1">刷新</span>
+                        </div>
+                    </div>
+                    <div class="text-center sp-query-btn">
+                        <button class="btn btn-danger" lay-submit lay-filter="code">查询</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="layer_notice" style="display: none" id="query-list">
+    </div>
+    <div class="sp-footer-nav">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-8 col-xs-12 row">
+                    <div class="col-md-2 col-sm-2 col-xs-6">
+                        <span><a href="/invoice-entry.html" title="发票录入">发票录入</a></span>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-xs-6">
+                        <span><a href="/notice.html" title="中奖公告">中奖公告</a></span>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-xs-6">
+                        <span><a href="/query.html" title="中奖查询">中奖查询</a></span>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-xs-6">
+                        <span><a href="/new.html?type=3" title="常见问题">常见问题</a></span>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-12 text-center">
+                    <div class="footer-phone clearfix">
+                        <i class="icon pull-left"></i>
+                        <span class="pull-left">0537-2288888</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sp-links">
+        <div class="container">
+            <ul class="clearfix" id="friend-ship">
+                <li class="pull-left">友情链接 :</li>
+            </ul>
+        </div>
+    </div>
+    <footer class="container text-center">
+        <p>发票摇奖领导小组办公室 版权所有 未经许可不得转载 鲁ICP备16020888 号 联系电话：0537-2888888 邮编：272100 </p>
+        <p>Copyright 2018-2020 Invoice Management Reform Leading Group. All rights reserved </p>
+        <img src="./images/badge.png" alt="">
+        <p>技术支持：麦贝网络技术 联系电话：18888888888 </p>
+        <!-- <p>今日访问量：96 昨日访问量：534 本月访问量：735 今年访问量：25898 总共访问量：99337</p> -->
+    </footer>
+
+    <script src="./js/jquery-3.4.0.min.js"></script>
+    <script src="./js/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script src="./js/layui/layui.js"></script>
+    <script src="./js/config.js"></script>
+    <script src="./js/view/query.js"></script>
+</body>
+
+</html>

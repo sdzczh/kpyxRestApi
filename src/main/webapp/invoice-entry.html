@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="favicon.ico">
+    <title>开票有喜网</title>
+    <link rel="stylesheet" href="./js/bootstrap-3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./js/layui/css/layui.css">
+    <link rel="stylesheet" href="./css/public.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-default sp-navbar">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav"
+                    aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="navbar-header-t clearfix">
+                    <a class="navbar-brand pull-left" href="/">
+                        <img src="./images/logo.png" alt="">
+                    </a>
+                    <div class="navbar-phone clearfix pull-right hidden-xs">
+                        <i class="icon pull-left"></i>
+                        <span class="pull-left">0537-2288888</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="navbar-toolbar">
+            <div class="container">
+                <div class="collapse navbar-collapse" id="nav">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">网站首页</a></li>
+                        <li><a href="/notice.html">开奖公告</a></li>
+                        <li><a href="/new.html?type=1">政策法规</a></li>
+                        <li><a href="/new.html?type=2">新闻资讯</a></li>
+                        <li><a href="/report.html">涉税举报</a></li>
+                        <li class="active"><a href="/invoice-entry.html">发票录入</a></li>
+                        <!-- <li><a href="#">开奖视频</a></li> -->
+                        <li><a href="/new.html?type=3">常见问题</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="banner">
+        <img src="./images/banner.png" class="img-responsive" alt="">
+    </div>
+
+    <div class="container">
+        <div class="sp-breadcrumb clearfix">
+            <i class="glyphicon glyphicon-home pull-left"></i>
+            <ol class="sp-breadcrumb-list pull-left clearfix">
+                <li class="pull-left">您的位置：</li>
+                <li class="pull-left"><a href="/">首页</a></li>
+                <li class="pull-left"><i class="glyphicon glyphicon-menu-right"></i></li>
+                <li class="pull-left" class="active">发票录入</li>
+            </ol>
+        </div>
+        <form class="layui-form sp-form sp-ine-form clearfix" id="ine-form" onsubmit="return false">
+            <div class="row layui-form-item" data-id="0">
+                <div class="col-xs-11 row">
+                    <div class="col-md-4 mt-npr mt-npl">
+                        <div class="form-label col-md-4">
+                            <label class="layui-form-label">发票代码：</label>
+                        </div>
+                        <div class="col-md-8 mt-npr mt-npl mt-xs-npl mt-xs-npr layui-input-block">
+                            <input type="text" name="invoice_code" data-indx="0" lay-verType="tips" lay-verify="required"
+                                placeholder="输入8位或12位发票代码" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="col-md-4 mt-npr">
+                        <div class="form-label col-md-4">
+                            <label class="layui-form-label">发票号码：</label>
+                        </div>
+                        <div class="col-md-8 mt-npr mt-npl mt-xs-npl mt-xs-npr layui-input-block">
+                            <input type="text" name="invoice_id" data-indx="0" lay-verType="tips" lay-verify="required"
+                                placeholder="输入8位发票号码" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 mt-npr">
+                        <div class="form-label col-md-4">
+                            <label class="layui-form-label">开票金额：</label>
+                        </div>
+                        <div class="col-md-8 mt-npr mt-npl mt-xs-npl mt-xs-npr layui-input-block">
+                            <input type="text" name="amount" data-indx="0" lay-verType="tips" lay-verify="required"
+                                placeholder="输入开票金额" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-1 hidden-xs hidden-sm">
+                    <button type="button" id="btn-add" data-btn-add class="invoice-form-action invoice-form-add">+</button>
+                </div>
+            </div>
+            <div class="row layui-form-item" id="form-once">
+                <div class="col-xs-11 row">
+                    <div class="col-md-4 mt-npr mt-npl">
+                        <div class="form-label col-md-4">
+                            <label class="layui-form-label">身份证：</label>
+                        </div>
+                        <div class="col-md-8 mt-npr mt-npl mt-xs-npl mt-xs-npr layui-input-block">
+                            <input type="text" name="id_card_num" lay-verType="tips" lay-verify="identity"
+                                placeholder="输入身份证号码" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="col-md-4 mt-npr">
+                        <div class="form-label col-md-4">
+                            <label class="layui-form-label">手机号码：</label>
+                        </div>
+                        <div class="col-md-8 mt-npr mt-npl mt-xs-npl mt-xs-npr layui-input-block">
+                            <input type="text" name="phone" data-indx="1" lay-verType="tips" lay-verify="phone"
+                                placeholder="输入手机号" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="col-md-4 mt-npr clearfix">
+                        <div class="form-label col-md-4">
+                            <label class="layui-form-label">验证码：</label>
+                        </div>
+                        <div class="col-md-8 col-sm-12 mt-npr mt-npl mt-xs-npl mt-xs-npr clearfix layui-input-block pull-left">
+                            <div class="pull-left" style="width: 95px;">
+                                <input type="text" name="code" lay-verType="tips" lay-verify="required"
+                                    placeholder="输入验证码" autocomplete="off" class="layui-input">
+                            </div>
+                            <div class="mt-npr pull-left code-wrap">
+                                <img data-validate-code="1" data-code-refresh="1" src="" alt="">
+                                <span data-code-refresh="1">刷新</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="ine-btn-group">
+                <button class="btn btn-danger" lay-submit lay-filter="invoice">提交</button>
+                <button type="reset" class="btn">重置</button>
+            </div>
+        </form>
+        <div class="layui-form sp-form sp-ine-form clearfix hide" id="form-copy">
+            <div class="row layui-form-item" data-id="1">
+                <div class="col-xs-11 row">
+                    <div class="col-md-4 mt-npr mt-npl">
+                        <div class="form-label col-md-4">
+                            <label class="layui-form-label">发票代码：</label>
+                        </div>
+                        <div class="col-md-8 mt-npr mt-npl layui-input-block">
+                            <input type="text" name="invoice_code" data-indx="1" lay-verType="tips" lay-verify="required"
+                                placeholder="输入8位或12位发票代码" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="col-md-4 mt-npr">
+                        <div class="form-label col-md-4">
+                            <label class="layui-form-label">发票号码：</label>
+                        </div>
+                        <div class="col-md-8 mt-npr mt-npl layui-input-block">
+                            <input type="text" name="invoice_id" data-indx="1" lay-verType="tips" lay-verify="required"
+                                placeholder="输入8位发票号码" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="col-md-4 mt-npr">
+                        <div class="form-label col-md-4">
+                            <label class="layui-form-label">开票金额：</label>
+                        </div>
+                        <div class="col-md-8 mt-npr mt-npl layui-input-block">
+                            <input type="text" name="amount" data-indx="1" lay-verType="tips" lay-verify="required"
+                                placeholder="输入开票金额" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-1">
+                    <button data-btn-id="1" type="button" class="invoice-form-action invoice-form-del">-</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sp-footer-nav">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-8 col-xs-12 row">
+                    <div class="col-md-2 col-sm-2 col-xs-6">
+                        <span><a href="/invoice-entry.html" title="发票录入">发票录入</a></span>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-xs-6">
+                        <span><a href="/notice.html" title="中奖公告">中奖公告</a></span>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-xs-6">
+                        <span><a href="/query.html" title="中奖查询">中奖查询</a></span>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-xs-6">
+                        <span><a href="/new.html?type=3" title="常见问题">常见问题</a></span>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-12 text-center">
+                    <div class="footer-phone clearfix">
+                        <i class="icon pull-left"></i>
+                        <span class="pull-left">0537-2288888</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sp-links">
+        <div class="container">
+            <ul class="clearfix" id="friend-ship">
+                <li class="pull-left">友情链接 :</li>
+            </ul>
+        </div>
+    </div>
+    <footer class="container text-center">
+        <p>发票摇奖领导小组办公室 版权所有 未经许可不得转载 鲁ICP备16020888 号 联系电话：0537-2888888 邮编：272100 </p>
+        <p>Copyright 2018-2020 Invoice Management Reform Leading Group. All rights reserved </p>
+        <img src="./images/badge.png" alt="">
+        <p>技术支持：麦贝网络技术 联系电话：18888888888 </p>
+        <!-- <p>今日访问量：96 昨日访问量：534 本月访问量：735 今年访问量：25898 总共访问量：99337</p> -->
+    </footer>
+
+    <script src="./js/jquery-3.4.0.min.js"></script>
+    <script src="./js/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script src="./js/layui/layui.js"></script>
+    <script src="./js/config.js"></script>
+    <script src="./js/view/invoice-entry.js"></script>
+</body>
+
+</html>

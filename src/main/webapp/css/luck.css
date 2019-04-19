@@ -1,0 +1,17 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.sp-luck {
+  background: url('../images/luckbg.png') no-repeat;
+  background-size: cover;
+}
+.sp-luck .title {
+  width: 3.1328125rem;
+  margin: 0.234375rem auto 0.359375rem;
+}
+.sp-luck .title img {
+  width: 100%;
+}

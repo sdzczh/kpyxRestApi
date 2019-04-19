@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<ul>
+    <li><label>验证码：</label></li>
+    <li>
+        <div>
+            <input  type="text" name="validateCode" id="code" class="login_input" value=""/>
+            <img  id="img" src="" onclick="onclickValidateCode(this);" />
+            <a onclick="sub()">提交</a>
+        </div>
+    </li>
+    <li>
+        <div class="form-group">
+                <label class="col-sm-2 control-label">图片:</label>
+                <input type="file" name="logoFile" id="logoFile" onchange="setImg(this);">
+        </div>
+    </li>
+</ul>
+</body>
+</html>
+<script src="../../static/js/jquery.min.js"></script>
+<script type="text/javascript">
+    var pictureUrl = "/validateCode?time=" + new Date().getTime();//后台传入的图片路径，url指的是数据库中图片的路径
+    document.getElementById("img").src = pictureUrl;
+
+    function onclickValidateCode(obj){
+        var timestamp = new Date().getTime();
+        console.info(timestamp);
+        $(obj).attr("src","/validateCode?time=" + timestamp);
+    }
+
+    function sub() {
+        var code = document.getElementById("code").value;
+        console.info(code);
+        $.post("/invoice/insert",{'code' : code}, function (result){
+            alert(result)
+        }
+        )
+    }
+
+
+    function setImg(obj){
+        var f=$(obj).val();
+        alert(f);
+        console.log(obj);
+        if(f == null || f ==undefined || f == ''){
+            return false;
+        }
+        if(!/\.(?:png|jpg|bmp|gif|PNG|JPG|BMP|GIF)$/.test(f))
+        {
+            alert("类型必须是图片(.png|jpg|bmp|gif|PNG|JPG|BMP|GIF)");
+            $(obj).val('');
+            return false;
+        }
+        var data = new FormData();
+        console.log(data);
+        $.each($(obj)[0].files,function(i,file){
+            data.append('file', file);
+        });
+        console.log(data);
+        $.ajax({
+            type: "POST",
+            url:"/file/upload",
+            data: data,
+            cache: false,
+            contentType: false,    //不可缺
+            processData: false,    //不可缺
+            dataType:"json",
+            success: function(ret) {
+                console.log(ret);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("上传失败，请检查网络后重试");
+            }
+        });
+    }
+</script>
+</html>
