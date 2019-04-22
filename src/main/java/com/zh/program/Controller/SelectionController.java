@@ -57,6 +57,9 @@ public class SelectionController {
         map.put("number", number);
         try {
             List<Map<String, Object>> list = selectionService.selectList(map);
+            if(list.size() == 0){
+                return Result.toResult(ResultCode.RESULE_DATA_NONE);
+            }
             List<String> linkedList = new LinkedList<>();
             for(Map<String, Object> result : list){
                 linkedList.add(result.get("invoice_id").toString());
