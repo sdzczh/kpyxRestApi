@@ -41,4 +41,27 @@ public class SelectionController {
         List<Map<String, Object>> list = selectionService.selectList(map);
         return Result.toResult(ResultCode.SUCCESS, list);
     }
+
+    /**
+     * 获取获选人名单
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/getSelectList")
+    public String getSelectList(Integer number){
+        if(number == null){
+            return Result.toResult(ResultCode.PARAM_IS_BLANK);
+        }
+        Map<Object, Object> map = new HashMap<>();
+        Map<Object, Object> data = new HashMap<>();
+        map.put("number", number);
+        List<Map<String, Object>> list = selectionService.selectList(map);
+        List<String> linkedList = new LinkedList<>();
+        for(Map<String, Object> result : list){
+            linkedList.add(result.get("invoice_id").toString());
+        }
+        data.put("list", linkedList);
+        data.put("count", list.size());
+        return Result.toResult(ResultCode.SUCCESS, data);
+    }
 }
