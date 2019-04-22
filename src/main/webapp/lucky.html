@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>抽奖</title>
+    <link rel="stylesheet" href="./js/bootstrap-3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./js/vide7.4.1/css/video-js.min.css">
+    <link rel="stylesheet" href="./js/layui/css/layui.css">
+    <link rel="stylesheet" href="./css/lucky.css">
+    <script src="./js/amfe-flexible.js"></script>
+</head>
+
+<body class="sp-lucky">
+    <div class="lucky-bg">
+        <img class="lucky-bg-l" src="/images/lucky/l.png" alt="">
+        <img class="lucky-bg-r" src="/images/lucky/r.png" alt="">
+        <img class="lucky-bg-b" src="/images/lucky/b.png" alt="">
+    </div>
+
+    <div class="lucky-content">
+        <div class="lucky-title">
+            <h1><img src="/images/lucky/t.png" alt=""></h1>
+        </div>
+        <form class="layui-form lucky-form" onsubmit="return false">
+            <div class="layui-form-item lucky-form-select">
+                <div class="layui-input-block">
+                    <select id="lucky-select" lay-filter="type" name="type" lay-verify="lucky" lay-verType="msg">
+                        <option value="">请选择奖项</option>
+                    </select>
+                </div>
+            </div>
+            <div class="lucky-btn-group">
+                <button id="startRaffle" lay-submit lay-filter="lucky" class="lucky-btn lucky-btn-start"></button>
+                <button id="endRaffle" class="lucky-btn lucky-btn-end" disabled></button>
+            </div>
+        </form>
+        <div class="lucky-dog-wrap">
+            <ul id="lucky-dog-list">
+               
+            </ul>
+        </div>
+    </div>
+
+    <script src="./js/jquery-3.4.0.min.js"></script>
+    <script src="./js/layui/layui.js"></script>
+    <script src="./js/crypto-js.js"></script>
+    <script src="./js/jsencrypt.js"></script>
+    <script src="./js/config.js"></script>
+    <script src="./js/view/lucky.js"></script>
+</body>
+
+</html>

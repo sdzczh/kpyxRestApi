@@ -1,0 +1,161 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.sp-lucky {
+  background: url("../images/lucky/bg.png") no-repeat;
+  background-size: cover;
+}
+
+.lucky-bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 0;
+  .lucky-bg-l {
+    position: absolute;
+    height: 100%;
+    left: 0;
+    top: 0;
+    bottom: 0;
+  }
+  .lucky-bg-r {
+    position: absolute;
+    height: 100%;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+  .lucky-bg-b {
+    position: absolute;
+    width: 100%;
+    right: 0;
+    left: 0;
+    bottom: 0;
+  }
+}
+
+.lucky-content {
+  position: relative;
+  z-index: 1;
+  .lucky-title {
+    text-align: center;
+    padding: 0.2421875rem 0 0.3359375rem 0;
+    h1 {
+      display: inline-block;
+      width: 4.9375rem;
+      img {
+        width: 100%;
+      }
+    }
+  }
+  .lucky-form {
+    margin: 0 auto;
+    width: 3.6484375rem;
+    .lucky-form-select {
+        margin-bottom: 0.2578125rem;
+      .layui-input-block {
+        margin: 0;
+        .layui-input {
+          background: transparent;
+          color: #ffffb2;
+          border: 0.0078125rem solid #ffffb2;
+          border-radius: 0.0546875rem;
+          font-size: 0.1640625rem;
+          font-weight: 500;
+          height: 0.4140625rem;
+          padding-right: 0.234375rem;
+          &:hover {
+            border: 0.0078125rem solid #ffffb2 !important;
+          }
+          &::-webkit-input-placeholder {
+            color: #ffffb2;
+          }
+        }
+        .layui-edge {
+          border-width: 0.046875rem;
+          right: 0.078125rem;
+          border-top-color: #ffffb2;
+        }
+      }
+      .layui-anim-upbit {
+        color: #ffffb2;
+        top: 0.4140625rem;
+        background-color: #da0000;
+        font-size: 0.1640625rem;
+        border-radius: 0;
+        border: 0.0078125rem solid #ffffb2;
+        .layui-select-tips {
+          color: #ffffb2;
+        }
+        .layui-this {
+          color: #da0000;
+          background-color: #ffffb2;
+        }
+        dd:hover {
+          color: #da0000;
+          background-color: #d0d08f;
+        }
+      }
+    }
+    .lucky-btn-group {
+        padding: 0 0.15625rem;
+        display: flex;
+        justify-content: space-between;
+        .lucky-btn {
+            width: 1.2734375rem;
+            height: 0.421875rem;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-color: transparent;
+            border: none;
+            &.lucky-btn-start {
+                background-image: url('../images/lucky/start1.png');
+            }
+            &.lucky-btn-start:disabled {
+              background-image: url('../images/lucky/start.png');
+            }
+            &.lucky-btn-end {
+                background-image: url('../images/lucky/end1.png');
+            }
+            &.lucky-btn-end:disabled {
+              background-image: url('../images/lucky/end.png');
+            }
+        }
+    }
+  }
+  .lucky-dog-wrap {
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.1rem;
+    height: 2.9rem;
+    font-weight: 500;
+    .lucky-dog-type1 {
+      flex-wrap: wrap;
+      font-size: 0.4140625rem;
+      line-height: 1.5;
+      li {
+        text-align: center;
+        width: 100%;
+      }
+    }
+    .lucky-dog-type2 {
+      width: 7rem;
+      display: flex;
+      flex-wrap: wrap;
+      li {
+        width: 20%;
+        text-align: center;
+        line-height: 0.29rem;
+        font-size: 0.21rem;
+      }
+    }
+  }
+}

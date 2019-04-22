@@ -1,0 +1,158 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.sp-lucky {
+  background: url("../images/lucky/bg.png") no-repeat;
+  background-size: cover;
+}
+.lucky-bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 0;
+}
+.lucky-bg .lucky-bg-l {
+  position: absolute;
+  height: 100%;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+.lucky-bg .lucky-bg-r {
+  position: absolute;
+  height: 100%;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.lucky-bg .lucky-bg-b {
+  position: absolute;
+  width: 100%;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+.lucky-content {
+  position: relative;
+  z-index: 1;
+}
+.lucky-content .lucky-title {
+  text-align: center;
+  padding: 0.2421875rem 0 0.3359375rem 0;
+}
+.lucky-content .lucky-title h1 {
+  display: inline-block;
+  width: 4.9375rem;
+}
+.lucky-content .lucky-title h1 img {
+  width: 100%;
+}
+.lucky-content .lucky-form {
+  margin: 0 auto;
+  width: 3.6484375rem;
+}
+.lucky-content .lucky-form .lucky-form-select {
+  margin-bottom: 0.2578125rem;
+}
+.lucky-content .lucky-form .lucky-form-select .layui-input-block {
+  margin: 0;
+}
+.lucky-content .lucky-form .lucky-form-select .layui-input-block .layui-input {
+  background: transparent;
+  color: #ffffb2;
+  border: 0.0078125rem solid #ffffb2;
+  border-radius: 0.0546875rem;
+  font-size: 0.1640625rem;
+  font-weight: 500;
+  height: 0.4140625rem;
+  padding-right: 0.234375rem;
+}
+.lucky-content .lucky-form .lucky-form-select .layui-input-block .layui-input:hover {
+  border: 0.0078125rem solid #ffffb2 !important;
+}
+.lucky-content .lucky-form .lucky-form-select .layui-input-block .layui-input::-webkit-input-placeholder {
+  color: #ffffb2;
+}
+.lucky-content .lucky-form .lucky-form-select .layui-input-block .layui-edge {
+  border-width: 0.046875rem;
+  right: 0.078125rem;
+  border-top-color: #ffffb2;
+}
+.lucky-content .lucky-form .lucky-form-select .layui-anim-upbit {
+  color: #ffffb2;
+  top: 0.4140625rem;
+  background-color: #da0000;
+  font-size: 0.1640625rem;
+  border-radius: 0;
+  border: 0.0078125rem solid #ffffb2;
+}
+.lucky-content .lucky-form .lucky-form-select .layui-anim-upbit .layui-select-tips {
+  color: #ffffb2;
+}
+.lucky-content .lucky-form .lucky-form-select .layui-anim-upbit .layui-this {
+  color: #da0000;
+  background-color: #ffffb2;
+}
+.lucky-content .lucky-form .lucky-form-select .layui-anim-upbit dd:hover {
+  color: #da0000;
+  background-color: #d0d08f;
+}
+.lucky-content .lucky-form .lucky-btn-group {
+  padding: 0 0.15625rem;
+  display: flex;
+  justify-content: space-between;
+}
+.lucky-content .lucky-form .lucky-btn-group .lucky-btn {
+  width: 1.2734375rem;
+  height: 0.421875rem;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+}
+.lucky-content .lucky-form .lucky-btn-group .lucky-btn.lucky-btn-start {
+  background-image: url('../images/lucky/start1.png');
+}
+.lucky-content .lucky-form .lucky-btn-group .lucky-btn.lucky-btn-start:disabled {
+  background-image: url('../images/lucky/start.png');
+}
+.lucky-content .lucky-form .lucky-btn-group .lucky-btn.lucky-btn-end {
+  background-image: url('../images/lucky/end1.png');
+}
+.lucky-content .lucky-form .lucky-btn-group .lucky-btn.lucky-btn-end:disabled {
+  background-image: url('../images/lucky/end.png');
+}
+.lucky-content .lucky-dog-wrap {
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.1rem;
+  height: 2.9rem;
+  font-weight: 500;
+}
+.lucky-content .lucky-dog-wrap .lucky-dog-type1 {
+  flex-wrap: wrap;
+  font-size: 0.4140625rem;
+  line-height: 1.5;
+}
+.lucky-content .lucky-dog-wrap .lucky-dog-type1 li {
+  text-align: center;
+  width: 100%;
+}
+.lucky-content .lucky-dog-wrap .lucky-dog-type2 {
+  width: 7rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+.lucky-content .lucky-dog-wrap .lucky-dog-type2 li {
+  width: 20%;
+  text-align: center;
+  line-height: 0.29rem;
+  font-size: 0.21rem;
+}

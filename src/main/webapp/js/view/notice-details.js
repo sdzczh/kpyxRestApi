@@ -39,7 +39,7 @@ function renderPrizeList() {
         if (res.code == 10000) {
             var html = ''
             res.data.forEach(function(item, index) {
-                var o = LUCKLIST[item.type]
+                var o = LUCKYLIST[item.type]
                 html += '<tr>\
                             <td>' + o.title + o.prize + '元</td>\
                             <td>' + item.invoice_id + '</td>\

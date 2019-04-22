@@ -1,6 +1,6 @@
-var URL = 'http://192.168.3.15:8081'
+var URL = 'http://127.0.0.1'
 
-var LUCKLIST = [
+var LUCKYLIST = [
     {
         type: 0,
         title: '场内特等奖',

@@ -49,7 +49,7 @@ function successCallback(data) {
     refreshVaidateCode('[data-validate-code="1"]', new Date().getTime())
     var html = ''
     data.forEach(function (item, index) {
-        html += '<p>恭喜您中了第' + item.number + '期' + LUCKLIST[item.type].title + LUCKLIST[item.type].prize +'元， 中奖发票代码是' + item.invoice_code + '</p>'
+        html += '<p>恭喜您中了第' + item.number + '期' + LUCKYLIST[item.type].title + LUCKYLIST[item.type].prize +'元， 中奖发票代码是' + item.invoice_code + '</p>'
     })
     $('#query-list').html(html)
     layer.open({
