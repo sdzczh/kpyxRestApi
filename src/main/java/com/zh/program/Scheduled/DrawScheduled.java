@@ -30,7 +30,7 @@ public class DrawScheduled {
     @Autowired
     private SelectionService selectionService;
 
-    @Scheduled(cron = "0 49 9 * * ?")
+    @Scheduled(cron = "0 0 10 * * ?")
     public void scheduled(){
         String key = SysparamKeys.DRAW_ON_OFF;
         String state = sysparamService.queryByKey(key);

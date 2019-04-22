@@ -64,10 +64,13 @@ public class ProgramApplicationTests {
     }
     @Test
     public void contextLoads() throws Exception {
-        String aesKey = "5274e323bb474c36";
+        String aesKey = "9d724a3f45fe9c99";
         String secretKey = RSA.encode(aesKey, RSA.getPublikKey(BASE64.decoderByte(Constants.RSA_PUBLIC_KEY)));
-        String url = webUrl + "get";
+        String url = webUrl + "prize/draw";
         Map<String, Object> map = new HashMap<>();
+        map.put("amount", 1);
+        map.put("number", "2");
+        map.put("type", 1);
         JSONObject json = new JSONObject(map);
         String params = AES.encrypt(json.toJSONString(), aesKey);
         String result = post(url, params, null, null, secretKey);

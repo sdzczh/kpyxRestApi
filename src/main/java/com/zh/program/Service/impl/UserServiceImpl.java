@@ -1,6 +1,5 @@
 package com.zh.program.Service.impl;
 
-import com.zh.program.Dao.UserDao;
 import com.zh.program.Dao.UserMapper;
 import com.zh.program.Entrty.User;
 import com.zh.program.Service.UserService;
@@ -20,8 +19,6 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
     @Resource
     private UserMapper userMapper;
-    @Resource
-    private UserDao userDao;
 
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
@@ -70,8 +67,4 @@ public class UserServiceImpl implements UserService {
         return this.userMapper.selectCount(param);
     }
 
-    @Override
-    public List<User> findAll() {
-        return this.userDao.findAll();
-    }
 }

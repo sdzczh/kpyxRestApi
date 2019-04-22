@@ -82,5 +82,4 @@ public interface UserService {
      **/ 
     int selectCount(Map<Object, Object> param);
 
-    List<User> findAll();
 }
