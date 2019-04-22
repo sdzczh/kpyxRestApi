@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ProgramApplicationTests {
-    private static String webUrl = "http://localhost:8081/";
+    private static String webUrl = "http://localhost:8888/";
     private String get(String url,String params,String sign,String token){
         StringBuffer s = new StringBuffer();
         s.append(url)

@@ -7,6 +7,7 @@ import com.zh.program.Common.authorization.annotation.Params;
 import com.zh.program.Common.enums.ResultCode;
 import com.zh.program.Common.utils.DateUtils;
 import com.zh.program.Common.utils.DrawUtils;
+import com.zh.program.Common.utils.RedisUtil;
 import com.zh.program.Common.utils.StrUtils;
 import com.zh.program.Dto.Result;
 import com.zh.program.Entrty.Banner;
@@ -17,6 +18,7 @@ import com.zh.program.Service.BannerService;
 import com.zh.program.Service.PrizeService;
 import com.zh.program.Service.SelectionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,6 +39,10 @@ public class PrizeController {
     @Autowired
     private SelectionService selectionService;
 
+    @Autowired
+    private RedisTemplate<String, String> redis;
+
+
     /**
      * 查询中奖信息
      * @param id_card 身份证号
@@ -46,7 +52,12 @@ public class PrizeController {
      */
     @ResponseBody
     @RequestMapping("/queryPrize")
-    public String queryPrize(String id_card, String phone, String invoice_id, String invoice_code){
+    public String queryPrize(String id_card, String phone, String invoice_id, String invoice_code, String code, String time){
+        String key = "kpyx:" + Constants.VALIDATE_CODE + time;
+        String validateCode = RedisUtil.searchString(redis, key);
+        if(StrUtils.isBlank(validateCode) || !validateCode.equalsIgnoreCase(code)){
+            return Result.toResult(ResultCode.SMS_CHECK_ERROR);
+        }
         if(StrUtils.isBlank(id_card) && StrUtils.isBlank(phone) && StrUtils.isBlank(invoice_id) && StrUtils.isBlank(invoice_code)){
             return Result.toResult(ResultCode.PARAM_IS_BLANK);
         }

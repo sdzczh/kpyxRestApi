@@ -17,8 +17,11 @@ var candidateList = [], luckyDogList = {}
 
 var time = null //定时器
 
+var form = null
+
 layui.use('form', function () {
-    var form = layui.form
+    
+    form = layui.form
 
     form.verify({
         lucky: function (value) {
@@ -90,6 +93,9 @@ function startRaffle(data, key) {
     $('#startRaffle').attr('disabled', true)
     $('#endRaffle').attr('disabled', false)
 
+    $('#lucky-select').attr('disabled', true)
+    form.render('select')
+
     $.post(URL + '/prize/draw', data, function (res) {
         if (typeof res == 'string') {
             res = JSON.parse(res)
@@ -106,6 +112,9 @@ function endRaffle() {
 
     $('#startRaffle').attr('disabled', false)
     $('#endRaffle').attr('disabled', true)
+
+    $('#lucky-select').attr('disabled', false)
+    form.render('select');
 
     clearInterval(time)
 
