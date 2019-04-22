@@ -55,13 +55,18 @@ public class SelectionController {
         Map<Object, Object> map = new HashMap<>();
         Map<Object, Object> data = new HashMap<>();
         map.put("number", number);
-        List<Map<String, Object>> list = selectionService.selectList(map);
-        List<String> linkedList = new LinkedList<>();
-        for(Map<String, Object> result : list){
-            linkedList.add(result.get("invoice_id").toString());
+        try {
+            List<Map<String, Object>> list = selectionService.selectList(map);
+            List<String> linkedList = new LinkedList<>();
+            for(Map<String, Object> result : list){
+                linkedList.add(result.get("invoice_id").toString());
+            }
+            data.put("list", linkedList);
+            data.put("count", list.size());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.toResult(ResultCode.SYSTEM_INNER_ERROR);
         }
-        data.put("list", linkedList);
-        data.put("count", list.size());
         return Result.toResult(ResultCode.SUCCESS, data);
     }
 }

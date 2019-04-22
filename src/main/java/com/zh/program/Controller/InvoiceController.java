@@ -50,47 +50,22 @@ public class InvoiceController {
     @ResponseBody
     @RequestMapping("/insert")
     public String insert(String data, HttpServletRequest request, String code, String time){
-//        String validateCode = String.valueOf(request.getSession().getAttribute(VALIDATE_CODE));
         String key = "kpyx:" + Constants.VALIDATE_CODE + time;
         String validateCode = RedisUtil.searchString(redis, key);
         if(StrUtils.isBlank(validateCode) || !validateCode.equalsIgnoreCase(code)){
             return Result.toResult(ResultCode.SMS_CHECK_ERROR);
         }
         RedisUtil.deleteString(redis, key);
-        if(StrUtils.isBlank(data)){
+        if(StrUtils.isBlank(data)) {
             return Result.toResult(ResultCode.PARAM_IS_BLANK);
         }
-        JSONArray jsonArray = null;
+        String result = null;
         try {
-            jsonArray = JSONArray.parseArray(BASE64.decoder(data));
+            result = invoiceService.insertData(data);
         } catch (Exception e) {
             e.printStackTrace();
+            return Result.toResult(ResultCode.SYSTEM_INNER_ERROR);
         }
-        for(int i = 0; i < jsonArray.size(); i++){
-            JSONObject jsonObject = jsonArray.getJSONObject(i);
-            String idCardNum = jsonObject.getString("id_card_num");
-            String phone = jsonObject.getString("phone");
-            //验证手机号
-            if(!ValidateUtils.isPhone(phone)){
-                return Result.toResult(ResultCode.PARAM_PHONE_ERROR);
-            }
-            //验证身份证号
-            if(!ValidateUtils.isIdCard(idCardNum)){
-                return Result.toResult(ResultCode.PARAM_IDCARD_ERROR);
-            }
-            //todo：验证发票编码
-            Invoice invoice = new Invoice();
-            invoice.setIdCardNum(idCardNum);
-            invoice.setAmount(new BigDecimal(jsonObject.getString("amount")));
-            invoice.setInvoiceCode(jsonObject.getString("invoice_code"));
-            invoice.setInvoiceId(jsonObject.getString("invoice_id"));
-            invoice.setPhone(phone);
-            invoice.setState(Constants.STATE_ON);
-            invoice.setCreateDate(DateUtils.getCurrentDateStr());
-            invoiceService.insertSelective(invoice);
-        }
-        return Result.toResult(ResultCode.SUCCESS);
+        return result;
     }
-
-
 }

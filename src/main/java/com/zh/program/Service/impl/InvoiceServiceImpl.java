@@ -1,20 +1,33 @@
 package com.zh.program.Service.impl;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.zh.program.Common.Constants;
+import com.zh.program.Common.encrypt.BASE64;
+import com.zh.program.Common.enums.ResultCode;
+import com.zh.program.Common.utils.DateUtils;
+import com.zh.program.Common.utils.RedisUtil;
+import com.zh.program.Common.utils.ValidateUtils;
 import com.zh.program.Dao.InvoiceMapper;
+import com.zh.program.Dto.Result;
 import com.zh.program.Entrty.Invoice;
 import com.zh.program.Service.InvoiceService;
+
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 
  * @author: autogeneration
  * @date: 2019-04-11 15:41:37
- **/ 
+ **/
+@Transactional
 @Service("invoiceService")
 public class InvoiceServiceImpl implements InvoiceService {
     @Resource
@@ -65,5 +78,40 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public int selectCount(Map<Object, Object> param) {
         return this.invoiceMapper.selectCount(param);
+    }
+
+    @Override
+    public String insertData(String data) {
+        JSONArray jsonArray = null;
+        try {
+            jsonArray = JSONArray.parseArray(BASE64.decoder(data));
+        } catch (Exception e) {
+            e.printStackTrace();
+            Result.toResult(ResultCode.INTERFACE_DECRYPT_ERROR);
+        }
+        for(int i = 0; i < jsonArray.size(); i++){
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
+            String idCardNum = jsonObject.getString("id_card_num");
+            String phone = jsonObject.getString("phone");
+            //验证手机号
+            if(!ValidateUtils.isPhone(phone)){
+                return Result.toResult(ResultCode.PARAM_PHONE_ERROR);
+            }
+            //验证身份证号
+            if(!ValidateUtils.isIdCard(idCardNum)){
+                return Result.toResult(ResultCode.PARAM_IDCARD_ERROR);
+            }
+            //todo：验证发票编码
+            Invoice invoice = new Invoice();
+            invoice.setIdCardNum(idCardNum);
+            invoice.setAmount(new BigDecimal(jsonObject.getString("amount")));
+            invoice.setInvoiceCode(jsonObject.getString("invoice_code"));
+            invoice.setInvoiceId(jsonObject.getString("invoice_id"));
+            invoice.setPhone(phone);
+            invoice.setState(Constants.STATE_ON);
+            invoice.setCreateDate(DateUtils.getCurrentDateStr());
+            this.invoiceMapper.insertSelective(invoice);
+        }
+        return Result.toResult(ResultCode.SUCCESS, data);
     }
 }

@@ -81,4 +81,6 @@ public interface InvoiceService {
      * @date: 2019-04-11 15:41:37
      **/ 
     int selectCount(Map<Object, Object> param);
+
+    String insertData(String data);
 }
