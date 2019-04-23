@@ -78,11 +78,11 @@ public class IndexController {
         for(Article article : list){
             Integer type = article.getType();
             switch (type){
-                case Constants.ARTICLE_KJGG : if(kjggList.size() >= 6) break; kjggList.add(article);
-                case Constants.ARTICLE_ZCFG : if(zcfgList.size() >= 6) break; zcfgList.add(article);
-                case Constants.ARTICLE_XWZX : if(xwzxList.size() >= 6) break; xwzxList.add(article);
-                case Constants.ARTICLE_CJWT : if(cjwtList.size() >= 6) break; cjwtList.add(article);
-                case Constants.ARTICLE_TZGG : if(tzggList.size() >= 6) break; tzggList.add(article);
+                case Constants.ARTICLE_KJGG : if(kjggList.size() >= 6) { break;} kjggList.add(article);break;
+                case Constants.ARTICLE_ZCFG : if(zcfgList.size() >= 6) { break;} zcfgList.add(article);break;
+                case Constants.ARTICLE_XWZX : if(xwzxList.size() >= 6) { break;} xwzxList.add(article);break;
+                case Constants.ARTICLE_CJWT : if(cjwtList.size() >= 6) { break;} cjwtList.add(article);break;
+                case Constants.ARTICLE_TZGG : if(tzggList.size() >= 6) { break;} tzggList.add(article);break;
             }
         }
         data.put("kjggList", kjggList);

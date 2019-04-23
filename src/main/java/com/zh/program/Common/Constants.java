@@ -35,6 +35,7 @@ public class Constants {
     public static final int ARTICLE_XWZX = 2;
     public static final int ARTICLE_CJWT = 3;
     public static final int ARTICLE_TZGG = 4;
+    public static final int ARTICLE_RWMD = 5;
 
     //中奖人数
     public static final int DRAW_PERSON_NUMBER = 8;
