@@ -70,7 +70,6 @@ $(function () {
     $.get(URL + '/prize/getNumber', function (res) {
         var res = JSON.parse(res)
         if (res.code == 10000) {
-            res.data.number = 1
             number = res.data.number
             $.get(URL + '/selection/getSelectList', {
                 number: number

@@ -2,9 +2,6 @@
 $(function () {
 
     $('#video').attr('width', $('#sp-index-video-wrap').width())
-    videojs('video').ready(function () {
-        this.play()
-    });
 
     $.get(URL + '/index', function (res) {
         var res = JSON.parse(res)
@@ -62,6 +59,10 @@ layui.use('form', function () {
 
 function renderVideo(ele, data) {
     $(ele).attr('poster', data.imgUrl).find('source').attr('src', data.videoUrl)
+    videojs('video').ready(function(){
+        var myPlayer = this
+        myPlayer.play()
+    })
 }
 
 // top banner
@@ -86,7 +87,7 @@ function noticeList(ele, data) {
     var html = ''
     data.forEach(function (item, index) {
         html += '<li>\
-                    <a class="notice-li ellipsis" href="/notice-details.html?id=' + item.id + '&type=0&number=' + item.number + '" target="_self">' + item.title + '<span>' + moment(item.updateTime).format('YYYY-MM-DD') + '</span>\
+                    <a class="notice-li ellipsis" href="/notice-details.html?id=' + item.id + '&type=0&number=' + item.number + '" target="_self">' + item.title + '<span class="hidden-xs">' + moment(item.updateTime).format('YYYY-MM-DD') + '</span>\
                     </a>\
                 </li>'
     })

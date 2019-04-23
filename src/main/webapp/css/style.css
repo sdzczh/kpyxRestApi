@@ -152,6 +152,16 @@ footer img {
 .sp-banner .carousel-caption {
   display: none;
 }
+@media (max-width: 767px) {
+  .carousel-indicators li {
+    width: 6px;
+    height: 6px;
+  }
+  .carousel-indicators li.active {
+    width: 7px;
+    height: 7px;
+  }
+}
 .sp-index-notice {
   margin: 10px 0;
 }
