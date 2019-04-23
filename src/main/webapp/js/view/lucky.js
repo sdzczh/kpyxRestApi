@@ -21,13 +21,13 @@ var form = null
 
 var userId = sessionStorage.getItem('userId'), token = sessionStorage.getItem('token')
 
-if(!userId || !token) {
+if (!userId || !token) {
     location.replace('/lucky-login.html')
 }
 
 
 layui.use('form', function () {
-    
+
     form = layui.form
 
     form.verify({
@@ -38,8 +38,8 @@ layui.use('form', function () {
         }
     })
 
-    form.on('select(type)', function(data){
-        if(luckyDogList[data.value]) {
+    form.on('select(type)', function (data) {
+        if (luckyDogList[data.value]) {
             changeClass(luckyDogList[data.value].length)
             $('#startRaffle').attr('disabled', true)
             renderLuckyDog()
@@ -76,16 +76,36 @@ layui.use('form', function () {
 $(function () {
     renderSelect()
 
-    $.get(URL + '/prize/getNumber', function (res) {
-        var res = JSON.parse(res)
-        if (res.code == 10000) {
-            number = res.data.number
-            $.get(URL + '/selection/getSelectList', {
-                number: number
-            }, function (res) {
+
+    $.post(URL + '/login/check', {
+        params: aesEncrypt(JSON.stringify({
+            userId: userId,
+            token, token
+        })).toString(),
+        secret_key: rsaencrypt.encrypt(aes_key)
+    }, function (res) {
+        if (typeof res == 'string') {
+            res = JSON.parse(res)
+        }
+        if (res.code != 10000) {
+            location.replace('/lucky-login.html')
+        } else {
+
+            $('#startRaffle').attr('disabled', false)
+
+            $.get(URL + '/prize/getNumber', function (res) {
                 var res = JSON.parse(res)
                 if (res.code == 10000) {
-                    candidateList = res.data.list
+                    number = res.data.number
+
+                    $.get(URL + '/selection/getSelectList', {
+                        number: number
+                    }, function (res) {
+                        var res = JSON.parse(res)
+                        if (res.code == 10000) {
+                            candidateList = res.data.list
+                        }
+                    })
                 }
             })
         }
@@ -110,6 +130,8 @@ function startRaffle(data, key) {
         }
         if (res.code == 10000) {
             luckyDogList[key] = res.data
+        } else if (res.code == 20009) {
+            location.replace('/lucky-login.html')
         } else {
             layer.msg(res.msg)
         }

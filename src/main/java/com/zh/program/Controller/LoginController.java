@@ -5,6 +5,7 @@ import com.zh.program.Common.Constants;
 import com.zh.program.Common.authorization.annotation.Decrypt;
 import com.zh.program.Common.authorization.annotation.Params;
 import com.zh.program.Common.enums.ResultCode;
+import com.zh.program.Common.utils.StrUtils;
 import com.zh.program.Dto.Result;
 import com.zh.program.Entrty.Banner;
 import com.zh.program.Service.BannerService;
@@ -59,5 +60,32 @@ public class LoginController {
             return Result.toResult(ResultCode.PARAM_IS_BLANK);
         }
         return loginService.exit(usedId);
+    }
+
+    /**
+    *@Description: 检查用户登录状态
+    *@Param: [params, request]
+    *@return: java.lang.String
+    *@Author: zhaohe
+    *@date: 2019-04-23
+    */
+    @Decrypt
+    @ResponseBody
+    @PostMapping("/check")
+    public String check(@Params Object params, HttpServletRequest request){
+        try {
+            params = request.getAttribute(Constants.PARAM);
+            JSONObject json = (JSONObject)params;
+
+            Integer userId = json.getInteger("userId");
+            String token = json.getString("token");
+            /*参数校验*/
+            if(userId == null || StrUtils.isBlank(token)){
+                return Result.toResult(ResultCode.PARAM_IS_BLANK);
+            }
+            return loginService.check(token, userId);
+        } catch (Exception e) {
+            return Result.toResult(ResultCode.SYSTEM_INNER_ERROR);
+        }
     }
 }

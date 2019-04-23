@@ -72,4 +72,14 @@ public class LoginServiceImpl implements LoginService {
         RedisUtil.deleteString(redis, key);
         return Result.toResult(ResultCode.SUCCESS);
     }
+
+    @Override
+    public String check(String token, Integer userId) {
+        String key = "kpyx:" + "token:" + userId;
+        String strToken = RedisUtil.searchString(redis, key);
+        if(!token.equals(strToken)){
+            return Result.toResult(ResultCode.USER_NOT_LOGGED_IN);
+        }
+        return Result.toResult(ResultCode.SUCCESS);
+    }
 }

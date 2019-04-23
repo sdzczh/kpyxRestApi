@@ -1,4 +1,4 @@
-var URL = 'http://tlhe.cn/'
+var URL = '';
 
 var LUCKYLIST = [
     {

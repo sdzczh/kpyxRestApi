@@ -16,4 +16,6 @@ public interface LoginService {
     String check(JSONObject json);
 
     String exit(Integer usedId);
+
+    String check(String token, Integer userId);
 }
