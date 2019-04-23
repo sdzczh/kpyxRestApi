@@ -3,6 +3,7 @@ package com.zh.program.Service.impl;
 import com.zh.program.Common.Constants;
 import com.zh.program.Common.enums.ResultCode;
 import com.zh.program.Common.utils.DrawUtils;
+import com.zh.program.Common.utils.RedisUtil;
 import com.zh.program.Dao.InvoiceMapper;
 import com.zh.program.Dao.PrizeMapper;
 import com.zh.program.Dao.SelectionMapper;
@@ -10,13 +11,14 @@ import com.zh.program.Dto.Result;
 import com.zh.program.Entrty.Invoice;
 import com.zh.program.Entrty.Prize;
 import com.zh.program.Entrty.Selection;
-import com.zh.program.Service.InvoiceService;
 import com.zh.program.Service.PrizeService;
 
 import java.util.*;
 import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,6 +36,8 @@ public class PrizeServiceImpl implements PrizeService {
     private SelectionMapper selectionMapper;
     @Resource
     private InvoiceMapper invoiceMapper;
+    @Autowired
+    private RedisTemplate<String, String> redis;
 
     private static final Logger logger = LoggerFactory.getLogger(PrizeServiceImpl.class);
 
@@ -93,7 +97,12 @@ public class PrizeServiceImpl implements PrizeService {
     }
 
     @Override
-    public String draw(Integer amount, Integer type, Integer number) {
+    public String draw(Integer amount, Integer type, Integer number, String token, Integer userId) {
+        String key = "kpyx:" + "token:" + userId;
+        String strToken = RedisUtil.searchString(redis, key);
+        if(!token.equals(strToken)){
+            return Result.toResult(ResultCode.USER_NOT_AUTH);
+        }
         Map<Object, Object> map = new HashMap<>();
         map.put("state", Constants.STATE_ON);
         map.put("number", number);

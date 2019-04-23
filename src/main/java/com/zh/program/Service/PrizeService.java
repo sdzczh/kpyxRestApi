@@ -3,7 +3,6 @@ package com.zh.program.Service;
 import com.zh.program.Entrty.Prize;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * 
@@ -97,9 +96,11 @@ public interface PrizeService {
      * @param amount  中奖数量
      * @param type  奖品类型
      * @param number 期数
+     * @param token
+     * @param userId
      * @return
      */
-    String draw(Integer amount, Integer type, Integer number);
+    String draw(Integer amount, Integer type, Integer number, String token, Integer userId);
 
     /**
      * 获取期数列

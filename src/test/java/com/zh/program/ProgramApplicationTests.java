@@ -136,8 +136,8 @@ public class ProgramApplicationTests {
         String aesKey = "5274e323bb474c36";
         String url = webUrl+"login/admin";
         String secret_key = RSA.encode(aesKey, RSA.getPublikKey(BASE64.decoderByte(Constants.RSA_PUBLIC_KEY)));
-        Map<String, Object> map = new HashMap<String, Object>();
-        Map<String, Object> param = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> param = new HashMap<>();
         map.put("account", "admin");
         map.put("password", "111111");
         JSONObject json = new JSONObject(map);

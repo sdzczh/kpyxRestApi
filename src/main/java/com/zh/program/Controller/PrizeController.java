@@ -129,11 +129,13 @@ public class PrizeController {
             Integer amount = json.getInteger("amount");
             Integer type = json.getInteger("type");
             Integer number = json.getInteger("number");
+            Integer userId = json.getInteger("userId");
+            String token = json.getString("token");
             /*参数校验*/
-            if(amount == null || number == null || type == null){
+            if(amount == null || number == null || type == null || userId == null || StrUtils.isBlank(token)){
                 return Result.toResult(ResultCode.PARAM_IS_BLANK);
             }
-            return prizeService.draw(amount, type, number);
+            return prizeService.draw(amount, type, number, token, userId);
         } catch (Exception e) {
             return Result.toResult(ResultCode.SYSTEM_INNER_ERROR);
         }

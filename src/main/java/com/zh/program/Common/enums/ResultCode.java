@@ -21,7 +21,8 @@ public enum ResultCode {
     USER_HAS_EXISTED(20005, "用户已存在"),
     USER_ACCOUNT_LOGOFF(20006, "账号已被注销"),
     USER_NOT_REALNAME(20007, "用户未实名"),
-    USER_NOT_ROLE(20007, "用户权限不足"),
+    USER_NOT_ROLE(20008, "用户权限不足"),
+    USER_NOT_AUTH(20009, "用户身份验证失败"),
 
     /* 业务错误：30001-39999 */
     SMS_INTERFACE_ERROR(30001, "短信接口异常"),
