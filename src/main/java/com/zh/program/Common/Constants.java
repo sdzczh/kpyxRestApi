@@ -57,5 +57,6 @@ public class Constants {
 
     public static final String VALIDATE_CODE = "validateCode:";
 
-
+    //角色权限 超管
+    public static final String ADMIN_ROLE = "1";
 }
