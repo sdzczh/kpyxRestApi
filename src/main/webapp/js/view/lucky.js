@@ -19,6 +19,13 @@ var time = null //定时器
 
 var form = null
 
+var userId = sessionStorage.getItem('userId'), token = sessionStorage.getItem('token')
+
+if(!userId || !token) {
+    location.replace('/lucky-login.html')
+}
+
+
 layui.use('form', function () {
     
     form = layui.form
@@ -47,7 +54,9 @@ layui.use('form', function () {
         var map = {
             amount: LUCKYLIST[index].num,
             number: number,
-            type: LUCKYLIST[index].type
+            type: LUCKYLIST[index].type,
+            token: token,
+            userId: userId
         }
 
         log(map)

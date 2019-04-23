@@ -14,4 +14,6 @@ import java.util.Map;
 public interface LoginService {
 
     String check(JSONObject json);
+
+    String exit(Integer usedId);
 }

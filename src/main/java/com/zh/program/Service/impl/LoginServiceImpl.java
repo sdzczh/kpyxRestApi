@@ -65,4 +65,11 @@ public class LoginServiceImpl implements LoginService {
         }else
             return Result.toResult(ResultCode.USER_LOGIN_ERROR);
     }
+
+    @Override
+    public String exit(Integer userId) {
+        String key = "kpyx:" + "token:" + userId;
+        RedisUtil.deleteString(redis, key);
+        return Result.toResult(ResultCode.SUCCESS);
+    }
 }

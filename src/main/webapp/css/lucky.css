@@ -104,7 +104,11 @@ body {
 }
 .lucky-content .lucky-form .lucky-btn-group {
   padding: 0 0.15625rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
   justify-content: space-between;
 }
 .lucky-content .lucky-form .lucky-btn-group .lucky-btn {
@@ -116,27 +120,34 @@ body {
   border: none;
 }
 .lucky-content .lucky-form .lucky-btn-group .lucky-btn.lucky-btn-start {
-  background-image: url('../images/lucky/start1.png');
+  background-image: url("../images/lucky/start1.png");
 }
 .lucky-content .lucky-form .lucky-btn-group .lucky-btn.lucky-btn-start:disabled {
-  background-image: url('../images/lucky/start.png');
+  background-image: url("../images/lucky/start.png");
 }
 .lucky-content .lucky-form .lucky-btn-group .lucky-btn.lucky-btn-end {
-  background-image: url('../images/lucky/end1.png');
+  background-image: url("../images/lucky/end1.png");
 }
 .lucky-content .lucky-form .lucky-btn-group .lucky-btn.lucky-btn-end:disabled {
-  background-image: url('../images/lucky/end.png');
+  background-image: url("../images/lucky/end.png");
 }
 .lucky-content .lucky-dog-wrap {
   color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   margin-top: 0.1rem;
   height: 2.9rem;
   font-weight: 500;
 }
 .lucky-content .lucky-dog-wrap .lucky-dog-type1 {
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   font-size: 0.4140625rem;
   line-height: 1.5;
@@ -147,7 +158,10 @@ body {
 }
 .lucky-content .lucky-dog-wrap .lucky-dog-type2 {
   width: 7rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
 .lucky-content .lucky-dog-wrap .lucky-dog-type2 li {
@@ -155,4 +169,37 @@ body {
   text-align: center;
   line-height: 0.29rem;
   font-size: 0.21rem;
+}
+.lucky-login-content .lucky-login-form {
+  margin-top: 0.640625rem;
+  width: 4rem;
+  padding: 0 0.6640625rem;
+  background: #fff;
+  border-radius: 0.1328125rem;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  text-align: center;
+}
+.lucky-login-content .lucky-login-form .lucky-login-form-title {
+  font-size: 0.265625rem;
+  color: #333;
+  padding: 0.390625rem 0;
+}
+.lucky-login-content .lucky-login-form .layui-input-block {
+  margin: 0 0 0.203125rem;
+}
+.lucky-login-content .lucky-login-form .layui-input-block .layui-input {
+  height: 0.3984375rem;
+  text-align: center;
+}
+.lucky-login-content .lucky-login-form .layui-input-block .layui-btn {
+  width: 100%;
+  background: #cc1919;
+  color: #fff;
+  line-height: 0.3984375rem;
+  height: 0.3984375rem;
+  padding: 0;
+  border-radius: 0.0703125rem;
+  font-size: 0.1328125rem;
+  margin-bottom: 0.359375rem;
 }

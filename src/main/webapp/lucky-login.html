@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>抽奖</title>
+    <link rel="stylesheet" href="./js/bootstrap-3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./js/layui/css/layui.css">
+    <link rel="stylesheet" href="./css/lucky.css">
+    <script src="./js/amfe-flexible.js"></script>
+</head>
+
+<body class="sp-lucky">
+
+    <div class="lucky-content lucky-login-content">
+        <div class="lucky-title">
+            <h1><img src="/images/lucky/t.png" alt=""></h1>
+        </div>
+        <form class="layui-form lucky-form lucky-login-form">
+            <h2 class="lucky-login-form-title">登录系统</h2>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <input type="text" name="account" required lay-verify="required" placeholder="请输入用户名"
+                        autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <input type="password" name="password" required lay-verify="required" placeholder="请输入密码"
+                        autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button id="submit" class="layui-btn" lay-submit lay-filter="login">立即提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="./js/jquery-3.4.0.min.js"></script>
+    <script src="./js/layui/layui.js"></script>
+    <script src="./js/crypto-js.js"></script>
+    <script src="./js/jsencrypt.js"></script>
+    <script src="./js/config.js"></script>
+    <script src="./js/view/lucky-login.js"></script>
+</body>
+
+</html>

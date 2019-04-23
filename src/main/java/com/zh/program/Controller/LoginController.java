@@ -29,8 +29,12 @@ public class LoginController {
     private LoginService loginService;
 
     /**
-     * 管理员登录
-     */
+    *@Description: 管理员登录
+    *@Param: [params, request]
+    *@return: java.lang.String
+    *@Author: zhaohe
+    *@date: 2019-04-23
+    */
     @Decrypt
     @ResponseBody
     @PostMapping("/admin")
@@ -38,5 +42,22 @@ public class LoginController {
         params = request.getAttribute(Constants.PARAM);
         JSONObject json = (JSONObject)params;
         return loginService.check(json);
+    }
+
+    /**
+    *@Description: 会员退出
+    *@Param: [usedId]
+    *@return: java.lang.String
+    *@Author: zhaohe
+    *@date: 2019-04-23
+    */
+    @Decrypt
+    @ResponseBody
+    @PostMapping("/exit")
+    public String exit(Integer usedId){
+        if(usedId == null){
+            return Result.toResult(ResultCode.PARAM_IS_BLANK);
+        }
+        return loginService.exit(usedId);
     }
 }
