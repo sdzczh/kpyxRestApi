@@ -1,5 +1,7 @@
 package com.zh.program.Service.impl;
 
+import com.zh.program.Common.utils.RedisUtil;
+import com.zh.program.Common.utils.StrUtils;
 import com.zh.program.Dao.SysparamMapper;
 import com.zh.program.Entrty.Sysparam;
 import com.zh.program.Service.SysparamService;
@@ -10,6 +12,8 @@ import java.util.Map;
 import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 /**
@@ -21,6 +25,10 @@ import org.springframework.stereotype.Service;
 public class SysparamServiceImpl implements SysparamService {
     @Resource
     private SysparamMapper sysparamMapper;
+
+    @Autowired
+    private RedisTemplate<String, String> redis;
+
 
     private static final Logger logger = LoggerFactory.getLogger(SysparamServiceImpl.class);
 
@@ -71,12 +79,20 @@ public class SysparamServiceImpl implements SysparamService {
 
     @Override
     public String queryByKey(String key) {
-        Map<Object, Object> map = new HashMap<>();
-        map.put("keyName", key);
-        List<Sysparam> sysparamList = this.sysparamMapper.selectAll(map);
-        if(sysparamList.size() != 0){
-            return sysparamList.get(0).getKeyValue();
+        String redisKey = "kpyx:sysparam:" + key;
+        String value = RedisUtil.searchString(redis, redisKey);
+        if(StrUtils.isBlank(value)) {
+            Map<Object, Object> map = new HashMap<>();
+            map.put("keyName", key);
+            List<Sysparam> sysparamList = this.sysparamMapper.selectAll(map);
+            if (sysparamList.size() != 0) {
+                value = sysparamList.get(0).getKeyValue();
+                RedisUtil.addString(redis, redisKey, value);
+                return value;
+            }
+            return null;
+        }else{
+            return value;
         }
-        return null;
     }
 }
