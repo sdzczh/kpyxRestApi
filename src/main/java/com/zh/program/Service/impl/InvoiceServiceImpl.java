@@ -14,6 +14,7 @@ import com.zh.program.Entrty.Invoice;
 import com.zh.program.Service.InvoiceService;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
@@ -103,7 +104,14 @@ public class InvoiceServiceImpl implements InvoiceService {
             if(!ValidateUtils.isIdCard(idCardNum)){
                 return Result.toResult(ResultCode.PARAM_IDCARD_ERROR);
             }
-            //todo：验证发票编码
+            //验证发票是否已存在
+            Map<Object, Object> map = new HashMap<>();
+            map.put("invoiceId", invoiceId);
+            List<Invoice> list = invoiceMapper.selectAll(map);
+            if(list.size() != 0){
+                return Result.toResult(ResultCode.INVOICE_LIVE);
+            }
+            //保存
             Invoice invoice = new Invoice();
             invoice.setIdCardNum(idCardNum);
             invoice.setAmount(new BigDecimal(jsonObject.getString("amount")));

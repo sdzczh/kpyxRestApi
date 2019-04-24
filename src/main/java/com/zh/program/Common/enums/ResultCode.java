@@ -31,6 +31,7 @@ public enum ResultCode {
     SMS_CHECK_ERROR(30003, "验证码错误"),
     SMS_TIME_LIMIT_ERROR(30004, "验证码已过期"),
     SMS_COUNTS_LIMIT_ERROR(30005, "验证码使用超出次数限制"),
+    INVOICE_LIVE(30006, "发票编码已存在"),
 
     /* 系统错误：40001-49999 */
     SYSTEM_INNER_ERROR(40001, "系统异常"),
