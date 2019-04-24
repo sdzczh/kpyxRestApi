@@ -37,6 +37,7 @@ layui.use('form', function () {
                 $('#query-form-code')[0].reset()
                 successCallback(res.data)
             } else {
+                initVaidateCode()
                 layer.msg(res.msg)
             }
         })

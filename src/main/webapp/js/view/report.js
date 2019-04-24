@@ -6,7 +6,6 @@ $(function () {
     $('#file').on('change', function () {
         var fd = new FormData()
         fd.append('file', $(this)[0].files[0])
-        $(this).val('')
         $.ajax({  
             url: URL + '/file/upload',  
             type: 'post',
@@ -33,13 +32,13 @@ $(function () {
     $('#upload').on('click', '.upload-file-delete', function () {
         $(this).closest('.upload-file-img').remove()
         $('#upload-file').show()
+        $('#file').val('')
     })
 })
 
 layui.use('form', function () {
     var form = layui.form
     form.on('submit(report)', function (data) {
-        
         var code = data.field.code
         delete data.field.code
         data.field.img_url = $('[data-upload-img]').attr('src')
@@ -55,6 +54,7 @@ layui.use('form', function () {
                 $('#upload-file').show().siblings().remove()
                 refreshVaidateCode('[data-validate-code="1"]', new Date().getTime())
             } else {
+                initVaidateCode()
                 layer.msg(res.msg)
             }
         })

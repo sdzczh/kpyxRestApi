@@ -59,8 +59,6 @@ layui.use('form', function () {
             userId: userId
         }
 
-        log(map)
-
         startRaffle({
             params: aesEncrypt(JSON.stringify(map)).toString(),
             secret_key: rsaencrypt.encrypt(aes_key)

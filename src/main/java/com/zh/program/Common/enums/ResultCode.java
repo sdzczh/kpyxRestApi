@@ -12,6 +12,7 @@ public enum ResultCode {
     PARAM_PHONE_ERROR(10004, "手机号格式错误"),
     PARAM_IDCARD_ERROR(10005, "身份证号格式错误"),
     PARAM_IMG_BLANK(10006, "请上传图片"),
+    PARAM_INVOICE_BLANK(10007, "发票编码或发票号码格式不正确"),
 
     /* 用户错误：20001-29999*/
     USER_NOT_LOGGED_IN(20001, "用户未登录"),

@@ -48,7 +48,24 @@ public class ValidateUtils {
         String regexTradePwd = "^\\d{6}$";
         return verificationCode.matches(regexTradePwd);
     }
-    
+    /**验证是否为8位数字*/
+    public static boolean is8Num(String verificationCode){
+        if (StrUtils.isBlank(verificationCode)){
+            return false;
+        }
+        String regexTradePwd = "^\\d{8}$";
+        return verificationCode.matches(regexTradePwd);
+    }
+
+    /**验证是否为12位数字*/
+    public static boolean is12Num(String verificationCode){
+        if (StrUtils.isBlank(verificationCode)){
+            return false;
+        }
+        String regexTradePwd = "^\\d{12}$";
+        return verificationCode.matches(regexTradePwd);
+    }
+
     
     public static String replacePwdOfLog(String str){
     	String pwdStr = replaceAll(str, "\"password\":\".+?\"", "\"password\":\"***\"");

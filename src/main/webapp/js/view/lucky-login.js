@@ -22,7 +22,6 @@ layui.use('form', function () {
 
         $('#submit').attr('disabled', true)
 
-        log(data.field)
         $.post(URL + '/login/admin', 
         {
             params: aesEncrypt(JSON.stringify(data.field)).toString(),

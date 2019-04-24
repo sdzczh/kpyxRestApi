@@ -36,6 +36,20 @@ $(function () {
 // 发票录入
 layui.use('form', function () {
     var form = layui.form
+        
+    form.verify({
+        invoiceCode: function(value){
+        if(!new RegExp(/^(\d{10}|\d{12})$/).test(value)){
+            return '请输入10位或12位发票代码'
+        }
+        },
+        invoiceId: function(value){
+        if(!new RegExp(/^(\d{8})$/).test(value)){
+            return '请输入8位发票号码'
+        }
+        },
+    })
+        
     form.on('submit(invoice)', function (data) {
         var code = data.field.code
         delete data.field.code
@@ -50,6 +64,7 @@ layui.use('form', function () {
                 $('#invoice-form')[0].reset()
                 refreshVaidateCode('[data-validate-code="1"]', new Date().getTime())
             } else {
+                initVaidateCode()
                 layer.msg(res.msg)
             }
         })

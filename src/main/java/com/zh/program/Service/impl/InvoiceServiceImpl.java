@@ -93,6 +93,8 @@ public class InvoiceServiceImpl implements InvoiceService {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             String idCardNum = jsonObject.getString("id_card_num");
             String phone = jsonObject.getString("phone");
+            String invoiceCode = jsonObject.getString("invoice_code");
+            String invoiceId = jsonObject.getString("invoice_id");
             //验证手机号
             if(!ValidateUtils.isPhone(phone)){
                 return Result.toResult(ResultCode.PARAM_PHONE_ERROR);
@@ -105,8 +107,8 @@ public class InvoiceServiceImpl implements InvoiceService {
             Invoice invoice = new Invoice();
             invoice.setIdCardNum(idCardNum);
             invoice.setAmount(new BigDecimal(jsonObject.getString("amount")));
-            invoice.setInvoiceCode(jsonObject.getString("invoice_code"));
-            invoice.setInvoiceId(jsonObject.getString("invoice_id"));
+            invoice.setInvoiceCode(invoiceCode);
+            invoice.setInvoiceId(invoiceId);
             invoice.setPhone(phone);
             invoice.setState(Constants.STATE_ON);
             invoice.setCreateDate(DateUtils.getCurrentDateStr());

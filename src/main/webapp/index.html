@@ -102,8 +102,8 @@
                                 <label class="layui-form-label">发票代码：</label>
                             </div>
                             <div class="col-sm-9 layui-input-block">
-                                <input type="text" name="invoice_code" lay-verType="tips" lay-verify="required"
-                                    placeholder="输入8位或12位发票代码" autocomplete="off" class="layui-input">
+                                <input type="text" name="invoice_code" lay-verType="tips" lay-verify="invoiceCode"
+                                    placeholder="输入10位或12位发票代码" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-form-item">
@@ -111,7 +111,7 @@
                                 <label class="layui-form-label">发票号码：</label>
                             </div>
                             <div class="col-sm-9 layui-input-block">
-                                <input type="text" name="invoice_id" lay-verType="tips" lay-verify="required"
+                                <input type="text" name="invoice_id" lay-verType="tips" lay-verify="invoiceId"
                                     placeholder="输入8位发票号码" autocomplete="off" class="layui-input">
                             </div>
                         </div>
@@ -175,7 +175,7 @@
                 <div class="mt10 col-md-6 mt-xs-npl mt-xs-npr col-xs-12 mt-npr">
                     <div class="sp-card">
                         <div class="sp-card-title">
-                            <h3>新闻资讯<a href="">更多>></a></h3>
+                            <h3>新闻资讯<a href="/new.html?type=2">更多>></a></h3>
                         </div>
                         <ul class="sp-card-list" id="news">
                         </ul>
@@ -184,7 +184,7 @@
                 <div class="mt10 col-md-6 mt-xs-npl mt-xs-npr col-xs-12 mt-npr">
                     <div class="sp-card">
                         <div class="sp-card-title">
-                            <h3>政策法规<a href="">更多>></a></h3>
+                            <h3>政策法规<a href="/new.html?type=1">更多>></a></h3>
                         </div>
                         <ul class="sp-card-list" id="policies">
                         </ul>
@@ -193,7 +193,7 @@
                 <div class="mt10 col-md-6 mt-xs-npl mt-xs-npr col-xs-12 mt-npr">
                     <div class="sp-card">
                         <div class="sp-card-title">
-                            <h3>通知公告<a href="">更多>></a></h3>
+                            <h3>通知公告<a href="/notice.html">更多>></a></h3>
                         </div>
                         <ul class="sp-card-list" id="notify">
                         </ul>
@@ -202,7 +202,7 @@
                 <div class="mt10 col-md-6 mt-xs-npl mt-xs-npr col-xs-12 mt-npr">
                     <div class="sp-card">
                         <div class="sp-card-title">
-                            <h3>常见问题<a href="">更多>></a></h3>
+                            <h3>常见问题<a href="/new.html?type=3">更多>></a></h3>
                         </div>
                         <ul class="sp-card-list" id="problem">
                         </ul>
