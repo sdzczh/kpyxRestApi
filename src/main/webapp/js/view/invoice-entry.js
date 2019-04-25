@@ -49,7 +49,7 @@ layui.use('form', function () {
       }
     })
     $.get(URL + '/invoice/insert', {
-      data: btoa(JSON.stringify(list)),
+      data: btoa(unescape(encodeURIComponent( JSON.stringify(list) ))),
       code: code,
       time: $('[data-validate-code="1"]').attr('time')
     }, function (res) {

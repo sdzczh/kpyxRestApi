@@ -1,6 +1,8 @@
 package com.zh.program.Dao;
 
 import com.zh.program.Entrty.Sysparam;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 import java.util.Map;
 
@@ -23,5 +25,5 @@ public interface SysparamMapper {
 
     int selectCount(Map<Object, Object> param);
 
-    void updateByKey(String keyName, String keyValue);
+    void updateByKey(@Param("keyName") String keyName, @Param("keyValue") String keyValue);
 }

@@ -43,7 +43,7 @@ layui.use('form', function () {
         delete data.field.code
         data.field.img_url = $('[data-upload-img]').attr('src')
         $.get(URL + '/report/insert', {
-            data: btoa(JSON.stringify(data.field)),
+            data: btoa(unescape(encodeURIComponent( JSON.stringify(data.field) ))),
             code: code,
             time: $('[data-validate-code="1"]').attr('time')
         }, function (res) {

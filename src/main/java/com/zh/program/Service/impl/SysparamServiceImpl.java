@@ -87,7 +87,7 @@ public class SysparamServiceImpl implements SysparamService {
             List<Sysparam> sysparamList = this.sysparamMapper.selectAll(map);
             if (sysparamList.size() != 0) {
                 Sysparam sysparam = sysparamList.get(0);
-                RedisUtil.addStringObj(redis, redisKey, sysparam);
+                RedisUtil.addString(redis, redisKey, sysparam.getKeyValue());
                 return sysparam.getKeyValue();
             }
             return null;
@@ -117,6 +117,8 @@ public class SysparamServiceImpl implements SysparamService {
 
     @Override
     public void updateByKey(String key, String keyValue) {
+        String redisKey = "kpyx:sysparam:" + key;
+        RedisUtil.addString(redis, redisKey, keyValue);
         sysparamMapper.updateByKey(key, keyValue);
     }
 }

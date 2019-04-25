@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.*;
 
 /**
@@ -56,8 +57,7 @@ public class DrawServiceImpl implements DrawService {
         if(list.size() == 0){
             return;
         }
-        Invoice invoiceStart = list.get(list.size() - 1);
-        sysparamService.updateByKey(SysparamKeys.DRAW_START_ID, invoiceStart.getId().toString());
+
         //获取抽奖列表
         List<Integer> selectList = new LinkedList<>();
         for(Invoice invoice : list){
@@ -65,17 +65,18 @@ public class DrawServiceImpl implements DrawService {
         }
         //打乱list中元素顺序
         Collections.shuffle(list);
-        key = SysparamKeys.DRAW_NUMBER;
-        String drawNumber = sysparamService.queryByKey(key);
+        key = SysparamKeys.DRAW_AMOUNT;
+        String drawAmount = sysparamService.queryByKey(key);
         //中奖名单id
-        Set<Integer> set = DrawUtils.draw(Integer.valueOf(drawNumber), selectList);
+        Set<Integer> set = DrawUtils.draw(Integer.valueOf(drawAmount), selectList);
         map = new HashMap<>();
         List<Selection> selectionList = selectionService.selectAll(map);
-        Selection selection = selectionList.get(0);
+        Selection selection;
         int number;
-        if(selection == null){
+        if(selectionList.size() == 0){
             number = 1;
         }else{
+            selection = selectionList.get(0);
             number = selection.getNumber() + 1;
         }
         for(Integer index : set){
@@ -86,6 +87,11 @@ public class DrawServiceImpl implements DrawService {
             selection.setState(Constants.STATE_ON);
             selectionService.insertSelective(selection);
             log.info("插入选中发票信息 ID:" + index);
+
+            //修改状态
+            Invoice invoice = invoiceService.selectByPrimaryKey(index);
+            invoice.setState(Constants.STATE_OFF);
+            invoiceService.updateByPrimaryKeySelective(invoice);
         }
         //修改本期状态
         /*for(int i = start; i < list.size() + start; i++){
@@ -94,10 +100,11 @@ public class DrawServiceImpl implements DrawService {
             invoice.setState(Constants.STATE_OFF);
             invoiceService.updateByPrimaryKeySelective(invoice);
         }*/
-        //修改上一期状态
+        //修改上一期状态 根据起始id
+/*        Invoice invoiceStart = list.get(list.size() - 1);
         if(number != 1) {
-            invoiceService.updateByNumber(number - 1);
-        }
+            invoiceService.updateByNumber(invoiceStart.getId());
+        }*/
         //新建公告
         String title = sysparamService.queryByKey(SysparamKeys.ARTICLE_TITLE);
         title = String.format(title, Num2CN.cvt(number, true), set.size());
@@ -109,5 +116,10 @@ public class DrawServiceImpl implements DrawService {
         article.setContent(" ");
         article.setType(Constants.ARTICLE_RWMD);
         articleService.insertSelective(article);
+
+        //修改期数
+        String drawNumber = sysparamService.queryByKey(SysparamKeys.DRAW_NUMBER);
+        int num = Integer.valueOf(drawNumber) + 1;
+        sysparamService.updateByKey(SysparamKeys.DRAW_NUMBER, Integer.toString(num));
     }
 }

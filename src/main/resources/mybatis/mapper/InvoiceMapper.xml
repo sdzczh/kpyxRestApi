@@ -109,8 +109,8 @@
   </update>
   <update id="updateByNumber" parameterType="java.lang.Integer">
     update invoice
-    set  state = #{state,jdbcType=TINYINT}
-    where number = #{number,jdbcType=INTEGER}
+    set  state = 0
+    where id &lt; #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.zh.program.Entrty.Invoice">
     update invoice

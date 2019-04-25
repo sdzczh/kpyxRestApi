@@ -1,6 +1,8 @@
 package com.zh.program.Dao;
 
 import com.zh.program.Entrty.Invoice;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 import java.util.Map;
 
@@ -23,5 +25,5 @@ public interface InvoiceMapper {
 
     int selectCount(Map<Object, Object> param);
 
-    void updateByNumber(Integer number);
+    void updateByNumber(@Param("id") Integer number);
 }

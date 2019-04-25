@@ -54,7 +54,7 @@ layui.use('form', function () {
         var code = data.field.code
         delete data.field.code
         $.get(URL + '/invoice/insert', {
-            data: btoa(JSON.stringify([data.field])),
+            data: btoa(unescape(encodeURIComponent( JSON.stringify([data.field]) ))),
             code: code,
             time: $('[data-validate-code="1"]').attr('time')
         }, function (res) {
