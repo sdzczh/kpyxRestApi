@@ -6,10 +6,7 @@ import com.zh.program.Common.utils.DateUtils;
 import com.zh.program.Common.utils.DrawUtils;
 import com.zh.program.Common.utils.Num2CN;
 import com.zh.program.Dao.BannerMapper;
-import com.zh.program.Entrty.Article;
-import com.zh.program.Entrty.Banner;
-import com.zh.program.Entrty.Invoice;
-import com.zh.program.Entrty.Selection;
+import com.zh.program.Entrty.*;
 import com.zh.program.Service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -59,15 +56,19 @@ public class DrawServiceImpl implements DrawService {
         if(list.size() == 0){
             return;
         }
+        Invoice invoiceStart = list.get(list.size() - 1);
+        sysparamService.updateByKey(SysparamKeys.DRAW_START_ID, invoiceStart.getId().toString());
+        //获取抽奖列表
         List<Integer> selectList = new LinkedList<>();
         for(Invoice invoice : list){
             selectList.add(invoice.getId());
         }
-        Integer start = list.get(list.size() - 1).getId();
         //打乱list中元素顺序
         Collections.shuffle(list);
+        key = SysparamKeys.DRAW_NUMBER;
+        String drawNumber = sysparamService.queryByKey(key);
         //中奖名单id
-        Set<Integer> set = DrawUtils.draw(Constants.DRAW_PERSON_NUMBER, selectList);
+        Set<Integer> set = DrawUtils.draw(Integer.valueOf(drawNumber), selectList);
         map = new HashMap<>();
         List<Selection> selectionList = selectionService.selectAll(map);
         Selection selection = selectionList.get(0);
@@ -86,11 +87,16 @@ public class DrawServiceImpl implements DrawService {
             selectionService.insertSelective(selection);
             log.info("插入选中发票信息 ID:" + index);
         }
-        for(int i = start; i < list.size() + start; i++){
+        //修改本期状态
+        /*for(int i = start; i < list.size() + start; i++){
             //更改发票状态
             Invoice invoice = invoiceService.selectByPrimaryKey(i);
             invoice.setState(Constants.STATE_OFF);
             invoiceService.updateByPrimaryKeySelective(invoice);
+        }*/
+        //修改上一期状态
+        if(number != 1) {
+            invoiceService.updateByNumber(number - 1);
         }
         //新建公告
         String title = sysparamService.queryByKey(SysparamKeys.ARTICLE_TITLE);

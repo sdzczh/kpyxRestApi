@@ -88,4 +88,8 @@ public interface SysparamService {
      * @return
      */
     String queryByKey(String key);
+
+    Sysparam selectByKey(String key);
+
+    void updateByKey(String key, String keyValue);
 }

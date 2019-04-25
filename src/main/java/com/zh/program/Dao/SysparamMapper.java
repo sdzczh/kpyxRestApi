@@ -22,4 +22,6 @@ public interface SysparamMapper {
     List<Sysparam> selectPaging(Map<Object, Object> param);
 
     int selectCount(Map<Object, Object> param);
+
+    void updateByKey(String keyName, String keyValue);
 }

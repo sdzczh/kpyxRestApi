@@ -52,8 +52,10 @@ public interface InvoiceService {
 
     /**
      * 按主键查询
-     * 
+     *
+     * @param id 主键
      * @author: autogeneration
+     * @return 对象
      * @date: 2019-04-11 15:41:37
      **/ 
     Invoice selectByPrimaryKey(Integer id);
@@ -82,5 +84,21 @@ public interface InvoiceService {
      **/ 
     int selectCount(Map<Object, Object> param);
 
+    /**
+    *@Description:  发票录入
+    *@Param: [data]
+    *@return: java.lang.String
+    *@Author: zhaohe
+    *@date: 2019-04-25
+    */
     String insertData(String data);
+
+    /**
+    *@Description: 根据期数修改发票状态
+    *@Param: [number] 期数
+    *@return: void
+    *@Author: zhaohe
+    *@date: 2019-04-25
+    */
+    void updateByNumber(Integer number);
 }

@@ -22,4 +22,6 @@ public interface InvoiceMapper {
     List<Invoice> selectPaging(Map<Object, Object> param);
 
     int selectCount(Map<Object, Object> param);
+
+    void updateByNumber(Integer number);
 }

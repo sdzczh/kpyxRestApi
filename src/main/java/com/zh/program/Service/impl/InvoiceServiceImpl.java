@@ -6,7 +6,6 @@ import com.zh.program.Common.Constants;
 import com.zh.program.Common.encrypt.BASE64;
 import com.zh.program.Common.enums.ResultCode;
 import com.zh.program.Common.utils.DateUtils;
-import com.zh.program.Common.utils.RedisUtil;
 import com.zh.program.Common.utils.ValidateUtils;
 import com.zh.program.Dao.InvoiceMapper;
 import com.zh.program.Dto.Result;
@@ -123,5 +122,10 @@ public class InvoiceServiceImpl implements InvoiceService {
             this.invoiceMapper.insertSelective(invoice);
         }
         return Result.toResult(ResultCode.SUCCESS, data);
+    }
+
+    @Override
+    public void updateByNumber(Integer number) {
+        invoiceMapper.updateByNumber(number);
     }
 }

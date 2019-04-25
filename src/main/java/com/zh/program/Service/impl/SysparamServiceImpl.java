@@ -86,13 +86,37 @@ public class SysparamServiceImpl implements SysparamService {
             map.put("keyName", key);
             List<Sysparam> sysparamList = this.sysparamMapper.selectAll(map);
             if (sysparamList.size() != 0) {
-                value = sysparamList.get(0).getKeyValue();
-                RedisUtil.addString(redis, redisKey, value);
-                return value;
+                Sysparam sysparam = sysparamList.get(0);
+                RedisUtil.addStringObj(redis, redisKey, sysparam);
+                return sysparam.getKeyValue();
             }
             return null;
         }else{
             return value;
         }
+    }
+
+    @Override
+    public Sysparam selectByKey(String key) {
+        String redisKey = "kpyx:sysparam:" + key;
+        Sysparam sysparam = RedisUtil.searchStringObj(redis, redisKey, Sysparam.class);
+        if(sysparam == null) {
+            Map<Object, Object> map = new HashMap<>();
+            map.put("keyName", key);
+            List<Sysparam> sysparamList = this.sysparamMapper.selectAll(map);
+            if (sysparamList.size() != 0) {
+                sysparam = sysparamList.get(0);
+                RedisUtil.addStringObj(redis, redisKey, sysparam);
+                return sysparam;
+            }
+            return null;
+        }else{
+            return sysparam;
+        }
+    }
+
+    @Override
+    public void updateByKey(String key, String keyValue) {
+        sysparamMapper.updateByKey(key, keyValue);
     }
 }

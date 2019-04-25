@@ -70,6 +70,11 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <update id="updateByKey" parameterType="String">
+    update sysparam
+    set   key_value = #{keyValue,jdbcType=VARCHAR}
+    where key_name = #{keyName,jdbcType=VARCHAR}
+  </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.zh.program.Entrty.Sysparam">
     update sysparam
     <set>

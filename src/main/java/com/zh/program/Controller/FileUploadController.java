@@ -47,11 +47,9 @@ public class FileUploadController {
         int code=1;
         //获取文件名加后缀
         String fileName=file.getOriginalFilename();
-        System.out.println(fileName);
         if(fileName!=null&&fileName!=""){
             //文件存储位置
             String path = "/home/installPackage/imgs/";
-            System.out.println(path);
             //文件后缀
             String fileF = fileName.substring(fileName.lastIndexOf("."), fileName.length());
             //新的文件名
