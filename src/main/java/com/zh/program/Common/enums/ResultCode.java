@@ -6,8 +6,8 @@ public enum ResultCode {
     SUCCESS(10000, "成功"),
 
     /* 参数错误：10001-19999 */
-    PARAM_IS_INVALID(10001, "参数无效"),
-    PARAM_IS_BLANK(10002, "参数为空"),
+    PARAM_IS_INVALID(10001, "输入的参数无效"),
+    PARAM_IS_BLANK(10002, "请把数据填写完整"),
     PARAM_TYPE_BIND_ERROR(10003, "参数类型错误"),
     PARAM_PHONE_ERROR(10004, "手机号格式错误"),
     PARAM_IDCARD_ERROR(10005, "身份证号格式错误"),
@@ -32,6 +32,7 @@ public enum ResultCode {
     SMS_TIME_LIMIT_ERROR(30004, "验证码已过期"),
     SMS_COUNTS_LIMIT_ERROR(30005, "验证码使用超出次数限制"),
     INVOICE_LIVE(30006, "发票号码已存在"),
+    FILE_TOO_BIG(30007, "图片最大为500k"),
 
     /* 系统错误：40001-49999 */
     SYSTEM_INNER_ERROR(40001, "系统异常"),

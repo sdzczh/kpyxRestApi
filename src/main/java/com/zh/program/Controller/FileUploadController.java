@@ -35,6 +35,11 @@ public class FileUploadController {
     @ResponseBody
     @RequestMapping("/upload")
     public String uploadPicture(@RequestParam(value="file",required=false) MultipartFile file, HttpServletRequest request){
+        long size = file.getSize();
+        long sizeMax = new Long("512000");
+        if(size > sizeMax){
+            return Result.toResult(ResultCode.FILE_TOO_BIG);
+        }
         Map<String, Object> map = new HashMap<>();
         File targetFile=null;
         //返回存储路径

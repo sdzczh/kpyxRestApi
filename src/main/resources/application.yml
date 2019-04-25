@@ -16,6 +16,10 @@ spring:
     prefix: /WEB-INF/view/
   main:
     allow-bean-definition-overriding: true
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
 mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
   configuration:
