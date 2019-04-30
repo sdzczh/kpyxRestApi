@@ -6,6 +6,7 @@ import com.zh.program.Common.Constants;
 import com.zh.program.Common.encrypt.BASE64;
 import com.zh.program.Common.enums.ResultCode;
 import com.zh.program.Common.utils.DateUtils;
+import com.zh.program.Common.utils.StrUtils;
 import com.zh.program.Common.utils.ValidateUtils;
 import com.zh.program.Dao.InvoiceMapper;
 import com.zh.program.Dto.Result;
@@ -89,12 +90,20 @@ public class InvoiceServiceImpl implements InvoiceService {
             e.printStackTrace();
             Result.toResult(ResultCode.INTERFACE_DECRYPT_ERROR);
         }
+        if(jsonArray == null){
+            Result.toResult(ResultCode.PARAM_IS_BLANK);
+        }
         for(int i = 0; i < jsonArray.size(); i++){
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             String idCardNum = jsonObject.getString("id_card_num");
             String phone = jsonObject.getString("phone");
             String invoiceCode = jsonObject.getString("invoice_code");
             String invoiceId = jsonObject.getString("invoice_id");
+            String createDate = jsonObject.getString("create_date");
+            BigDecimal amount = new BigDecimal(jsonObject.getString("amount"));
+            if(amount.compareTo(new BigDecimal("100")) < 0){
+                return Result.toResult(ResultCode.PARAM_AMOUNT_TOO_SMALL);
+            }
             //验证手机号
             if(!ValidateUtils.isPhone(phone)){
                 return Result.toResult(ResultCode.PARAM_PHONE_ERROR);
@@ -113,12 +122,12 @@ public class InvoiceServiceImpl implements InvoiceService {
             //保存
             Invoice invoice = new Invoice();
             invoice.setIdCardNum(idCardNum);
-            invoice.setAmount(new BigDecimal(jsonObject.getString("amount")));
+            invoice.setAmount(amount);
             invoice.setInvoiceCode(invoiceCode);
             invoice.setInvoiceId(invoiceId);
             invoice.setPhone(phone);
             invoice.setState(Constants.STATE_ON);
-            invoice.setCreateDate(DateUtils.getCurrentDateStr());
+            invoice.setCreateDate(StrUtils.isBlank(createDate) ? DateUtils.getCurrentDateStr() : createDate);
             this.invoiceMapper.insertSelective(invoice);
         }
         return Result.toResult(ResultCode.SUCCESS, data);

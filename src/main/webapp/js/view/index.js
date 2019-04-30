@@ -32,29 +32,45 @@ $(function () {
 
 })
 
+layui.use('laydate', function () {
+    var laydate = layui.laydate;
+    //执行一个laydate实例
+    laydate.render({
+        elem: '[data-date="0"]',
+        max: moment(new Date()).format('YYYY-MM-DD')
+    })
+})
 
 // 发票录入
 layui.use('form', function () {
     var form = layui.form
-        
+
     form.verify({
-        invoiceCode: function(value){
-        if(!new RegExp(/^(\d{10}|\d{12})$/).test(value)){
-            return '请输入10位或12位发票代码'
-        }
+        invoiceCode: function (value) {
+            if (!new RegExp(/^(\d{10}|\d{12})$/).test(value)) {
+                return '请输入10位或12位发票代码'
+            }
         },
-        invoiceId: function(value){
-        if(!new RegExp(/^(\d{8})$/).test(value)){
-            return '请输入8位发票号码'
-        }
+        invoiceId: function (value) {
+            if (!new RegExp(/^(\d{8})$/).test(value)) {
+                return '请输入8位发票号码'
+            }
         },
+        amount: function (value) {
+            if (!value || isNaN(value)) {
+                return '请正确输入金额'
+            } else if (value < 100) {
+                return '金额必须大于100'
+            }
+        }
     })
-        
+
     form.on('submit(invoice)', function (data) {
+        log(data)
         var code = data.field.code
         delete data.field.code
         $.get(URL + '/invoice/insert', {
-            data: btoa(unescape(encodeURIComponent( JSON.stringify([data.field]) ))),
+            data: btoa(unescape(encodeURIComponent(JSON.stringify([data.field])))),
             code: code,
             time: $('[data-validate-code="1"]').attr('time')
         }, function (res) {
@@ -74,7 +90,7 @@ layui.use('form', function () {
 
 function renderVideo(ele, data) {
     $(ele).attr('poster', data.imgUrl).find('source').attr('src', data.videoUrl)
-    videojs('video').ready(function(){
+    videojs('video').ready(function () {
         var myPlayer = this
         myPlayer.play()
     })
