@@ -83,6 +83,7 @@ public class IndexController {
                 case Constants.ARTICLE_XWZX : if(xwzxList.size() >= 6) { break;} xwzxList.add(article);break;
                 case Constants.ARTICLE_CJWT : if(cjwtList.size() >= 6) { break;} cjwtList.add(article);break;
                 case Constants.ARTICLE_TZGG : if(tzggList.size() >= 6) { break;} tzggList.add(article);break;
+                default: cjwtList.add(article);break;
             }
         }
         data.put("kjggList", kjggList);
@@ -108,9 +109,10 @@ public class IndexController {
     public String getAll(){
         Map<Object, Object> map = new HashMap<>();
         List<FriendshipLink> list = friendshipLinkService.selectAll(map);
-        FriendshipLink friendshipLink = new FriendshipLink();
+        FriendshipLink friendshipLink;
         List<FriendshipLink> links = new LinkedList<>();
         for(FriendshipLink friendshipLink1 : list){
+            friendshipLink = new FriendshipLink();
             friendshipLink.setHref(friendshipLink1.getHref());
             friendshipLink.setTitle(friendshipLink1.getTitle());
             links.add(friendshipLink);
