@@ -52,23 +52,19 @@ public class PrizeController {
      */
     @ResponseBody
     @RequestMapping("/queryPrize")
-    public String queryPrize(String id_card, String phone, String invoice_id, String invoice_code, String code, String time){
+    public String queryPrize(String id_card, String phone, String invoice_id, String code, String time){
         String key = "kpyx:" + Constants.VALIDATE_CODE + time;
         String validateCode = RedisUtil.searchString(redis, key);
         if(StrUtils.isBlank(validateCode) || !validateCode.equalsIgnoreCase(code)){
             return Result.toResult(ResultCode.SMS_CHECK_ERROR);
         }
-        if(StrUtils.isBlank(id_card) && StrUtils.isBlank(phone) && StrUtils.isBlank(invoice_id) && StrUtils.isBlank(invoice_code)){
-            return Result.toResult(ResultCode.PARAM_IS_BLANK);
-        }
-        if((!StrUtils.isBlank(invoice_id) && StrUtils.isBlank(invoice_code)) || StrUtils.isBlank(invoice_id) && !StrUtils.isBlank(invoice_code)){
+        if(!StrUtils.isBlank(invoice_id)){
             return Result.toResult(ResultCode.PARAM_IS_BLANK);
         }
         Map<Object, Object> map = new HashMap<>();
         map.put("idCard", id_card);
         map.put("phone", phone);
         map.put("invoiceId", invoice_id);
-        map.put("invoiceCode", invoice_code);
         List<Map<String, Object>> list = prizeService.queryByPhoneIdCardInvoiceId(map);
         if(list == null || list.size() == 0){
             return Result.toResult(ResultCode.RESULE_DATA_NONE);
