@@ -23,7 +23,7 @@ function getList(page) {
             var html = ''
             res.data.data.forEach(function (item, index) {
                 html += '<li>\
-                            <a href="./new-details.html?id=' + item.id + '">' + item.title + '</a>\
+                            <a href="./new-details.html?id=' + item.id + '&type=' + type + '">' + item.title + '</a>\
                             <p><span>发布：' + item.author + '</span><span>时间：' + moment(item.updateTime).format('YYYY-MM-DD') + '</span><span>浏览量：' + item.clinkNum +'</span></p>\
                         </li>'
             })
@@ -54,7 +54,7 @@ function getRecommendList() {
         if(res.code == 10000) {
             var html = ''
             res.data.forEach(function (item, index) {
-                html += '<li class="hairline--bottom"><a href="/new-details.html?id=' + item.id + '">' + item.title + '</a></li>'
+                html += '<li class="hairline--bottom"><a href="/new-details.html?id=' + item.id + '&type=' + type + '">' + item.title + '</a></li>'
             })
             $('#recommend-list').html(html)
         }

@@ -131,6 +131,7 @@ ul {
 .sp-card-list {
   padding: 20px;
   height: 208px;
+  overflow: hidden;
 }
 .sp-card-list li {
   width: 100%;

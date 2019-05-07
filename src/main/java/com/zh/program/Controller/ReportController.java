@@ -1,31 +1,20 @@
 package com.zh.program.Controller;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.zh.program.Common.Constants;
 import com.zh.program.Common.encrypt.BASE64;
 import com.zh.program.Common.enums.ResultCode;
-import com.zh.program.Common.utils.DateUtils;
 import com.zh.program.Common.utils.RedisUtil;
 import com.zh.program.Common.utils.StrUtils;
 import com.zh.program.Common.utils.ValidateUtils;
 import com.zh.program.Dto.Result;
-import com.zh.program.Entrty.Invoice;
 import com.zh.program.Entrty.Report;
-import com.zh.program.Service.InvoiceService;
 import com.zh.program.Service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.IOException;
-import java.math.BigDecimal;
 
 /**
  * 举报

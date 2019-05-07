@@ -11,9 +11,9 @@ $(function () {
             renderBanner('#carousel-banner', data.topBanner)
             renderBanner('#carousel-mid-banner', data.topBanner)
             renderList('#problem', data.cjwtList)
-            renderList('#notify', data.tzggList)
-            renderList('#policies', data.zcfgList)
-            renderList('#news', data.xwzxList)
+            renderList('#notify', data.tzggList, 0)
+            renderList('#policies', data.zcfgList, 1)
+            renderList('#news', data.xwzxList, 2)
             noticeList('#notice', data.kjggList)
         }
     })
@@ -126,11 +126,11 @@ function noticeList(ele, data) {
 }
 
 // 渲染列表
-function renderList(ele, data) {
+function renderList(ele, data, type) {
     var html = ''
     data.forEach(function (item, index) {
         html += '<li>\
-                    <a class="clearfix ellipsis" href="/new-details.html?id=' + item.id + '" target="_self">' + item.title + '<span>' + moment(item.updateTime).format('YYYY-MM-DD') + '</span>\
+                    <a class="clearfix ellipsis" href="/new-details.html?id=' + item.id + '&type=' + item.type + '" target="_self">' + item.title + '<span>' + moment(item.updateTime).format('YYYY-MM-DD') + '</span>\
                     </a>\
                 </li>'
     })

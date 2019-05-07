@@ -83,9 +83,14 @@ public class IndexController {
                 case Constants.ARTICLE_XWZX : if(xwzxList.size() >= 6) { break;} xwzxList.add(article);break;
                 case Constants.ARTICLE_CJWT : if(cjwtList.size() >= 6) { break;} cjwtList.add(article);break;
                 case Constants.ARTICLE_TZGG : if(tzggList.size() >= 6) { break;} tzggList.add(article);break;
-                default: cjwtList.add(article);break;
+                default:
             }
         }
+        Collections.reverse(kjggList);
+        Collections.reverse(zcfgList);
+        Collections.reverse(xwzxList);
+        Collections.reverse(cjwtList);
+        Collections.reverse(tzggList);
         data.put("kjggList", kjggList);
         data.put("zcfgList", zcfgList);
         data.put("xwzxList", xwzxList);

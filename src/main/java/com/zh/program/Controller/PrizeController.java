@@ -58,7 +58,7 @@ public class PrizeController {
         if(StrUtils.isBlank(validateCode) || !validateCode.equalsIgnoreCase(code)){
             return Result.toResult(ResultCode.SMS_CHECK_ERROR);
         }
-        if(!StrUtils.isBlank(invoice_id)){
+        if(StrUtils.isBlank(phone) && StrUtils.isBlank(invoice_id)){
             return Result.toResult(ResultCode.PARAM_IS_BLANK);
         }
         Map<Object, Object> map = new HashMap<>();
@@ -67,7 +67,7 @@ public class PrizeController {
         map.put("invoiceId", invoice_id);
         List<Map<String, Object>> list = prizeService.queryByPhoneIdCardInvoiceId(map);
         if(list == null || list.size() == 0){
-            return Result.toResult(ResultCode.RESULE_DATA_NONE);
+            return Result.toResult(ResultCode.NONE_DRAW);
         }else {
             return Result.toResult(ResultCode.SUCCESS, list);
         }

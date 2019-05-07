@@ -34,6 +34,7 @@ public enum ResultCode {
     SMS_COUNTS_LIMIT_ERROR(30005, "验证码使用超出次数限制"),
     INVOICE_LIVE(30006, "发票号码已存在"),
     FILE_TOO_BIG(30007, "图片最大为500k"),
+    NONE_DRAW(30008, "抱歉，没有相应的中奖纪录"),
 
     /* 系统错误：40001-49999 */
     SYSTEM_INNER_ERROR(40001, "系统异常"),

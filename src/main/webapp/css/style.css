@@ -137,7 +137,8 @@
 footer {
   margin: 20px 0;
 }
-footer p {
+footer p,
+footer a {
   font-size: 12px;
   color: #999;
   line-height: 17px;
