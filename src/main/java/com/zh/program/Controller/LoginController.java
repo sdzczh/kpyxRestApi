@@ -9,13 +9,11 @@ import com.zh.program.Common.utils.StrUtils;
 import com.zh.program.Dto.Result;
 import com.zh.program.Entrty.Banner;
 import com.zh.program.Service.BannerService;
+import com.zh.program.Service.DrawService;
 import com.zh.program.Service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -28,6 +26,8 @@ import java.util.Map;
 public class LoginController {
     @Autowired
     private LoginService loginService;
+    @Autowired
+    private DrawService drawService;
 
     /**
     *@Description: 管理员登录
@@ -61,6 +61,13 @@ public class LoginController {
         }
         return loginService.exit(usedId);
     }
+/*
+    @ResponseBody
+    @GetMapping("/test")
+    public void test(){
+        drawService.job();
+    }
+*/
 
     /**
     *@Description: 检查用户登录状态

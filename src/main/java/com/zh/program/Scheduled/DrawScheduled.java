@@ -16,7 +16,14 @@ public class DrawScheduled {
     @Autowired
     private DrawService drawService;
 
-    @Scheduled(cron = "0 0 10 * * ?")
+    /**
+    *@Description: 每月第二个星期六凌晨1点触发
+    *@Param: []
+    *@return: void
+    *@Author: zhaohe
+    *@date: 2019-05-23
+    */
+    @Scheduled(cron = "0 0 1 ? * SAT")
     public void scheduled() {
         drawService.job();
     }

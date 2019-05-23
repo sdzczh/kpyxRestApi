@@ -2,6 +2,8 @@ package com.zh.program.Common.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -31,6 +33,13 @@ public class DateUtils {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	//获取上个月月份
+	public static String getLastMonth() {
+		LocalDate today = LocalDate.now();
+		today = today.minusMonths(1);
+		DateTimeFormatter formatters = DateTimeFormatter.ofPattern("yyyy-MM");
+		return formatters.format(today);
 	}
 	/**
 	 * 将时间戳转换为时间

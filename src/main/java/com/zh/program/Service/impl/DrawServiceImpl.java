@@ -40,6 +40,12 @@ public class DrawServiceImpl implements DrawService {
 
     @Override
     public void job(){
+        //判断今天是第几个周六
+        Calendar c = Calendar.getInstance();
+        int weeks = c.get(Calendar.WEEK_OF_MONTH);
+        if(weeks != 2){
+            return;
+        }
         String key = SysparamKeys.DRAW_ON_OFF;
         String state = sysparamService.queryByKey(key);
         if(state == null){
@@ -50,9 +56,10 @@ public class DrawServiceImpl implements DrawService {
             log.info("<<<<<<<<<<<<<<<<<<定时抽奖开关状态已关闭>>>>>>>>>>>>>>>>>");
             return;
         }
+        String month = DateUtils.getLastMonth();
         Map<Object, Object> map = new HashMap<>();
         map.put("state", Constants.STATE_ON);
-        map.put("createTime", DateUtils.getSomeDay(-30));
+        map.put("createDate", month);
         List<Invoice> list = invoiceService.selectAll(map);
         if(list.size() == 0){
             return;
@@ -89,7 +96,7 @@ public class DrawServiceImpl implements DrawService {
             log.info("插入选中发票信息 ID:" + index);
 
             //修改状态
-            Invoice invoice = invoiceService.selectByPrimaryKey(index);
+             Invoice invoice = invoiceService.selectByPrimaryKey(index);
             invoice.setState(Constants.STATE_OFF);
             invoiceService.updateByPrimaryKeySelective(invoice);
         }
